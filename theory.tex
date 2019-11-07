@@ -1,0 +1,700 @@
+\documentclass[14pt, a4paper]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage[english, russian]{babel}
+\usepackage{amsmath, amssymb, amsfonts, amsopn, amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Теорема}
+\newtheorem*{definition}{Определение}
+\newtheorem{lemma}{Лемма}
+\newtheorem*{remark}{Замечание}
+\newtheorem{example}{Пример}
+\newtheorem{corollary}{Следствие}[theorem]
+\newtheorem{statement}{Утверждение}
+
+\newcommand{\divisible}{\mathop{\vdots}}
+
+\title{Элементы теории чисел}
+\author{grznych}
+\date{\today}
+
+\begin{document}
+	
+\maketitle
+\tableofcontents
+	
+\newpage
+\section{Основные понятия и теоремы}
+\label{section:osn}
+	
+	\emph{Целые числа} включают в себя числа натуральные ($\mathbb{N}$), противоположные к натуральным (отрицательные) и ноль. Как обычно, множество целых чисел будем обозначать символом $\mathbb{Z}$, а принадлежность числа $x$ множеству целых чисел будем обозначать выражением $x\in\mathbb{Z}$. Все числа здесь и дальше считаются целыми, если не сказано обратное.
+	
+	Основные свойства целых чисел и операций (сложение, вычитание, умножение, деление) над ними будем считать уже известными. Таким образом, если $a,b\in\mathbb{Z}$, то $a+b\in\mathbb{Z}$, $a-b\in\mathbb{Z}$, $ab\in\mathbb{Z}$, однако $\frac{a}{b}$ может быть как целым, так и не целым.
+	
+\subsection{Деление с остатком}
+\label{subsection:del}
+	
+	\begin{definition}[делимость]
+		Если $\frac{a}{b}$ целое, то мы говорим, что $a$ \emph{делится на} $b$ (обозначение $a\divisible b$) или что $b$ \emph{делит} $a$ (обозначение $b\mid a$). Таким образом, $a=bq$, где $q=\frac{a}{b}\in\mathbb{Z}$, то есть $a$ \emph{представляется произведением $b$ на целое}. При этом $a$ будем называть \emph{кратным} числа $b$, а $b$ --- \emph{делителем} числа $a$.
+	\end{definition}
+
+	\begin{remark}
+		Очевидно, что $a\divisible b$ тогда и только тогда, когда $a=bq$, где $q\in\mathbb{Z}$.
+	\end{remark}
+	
+	\begin{example}
+		Любое целое число $a$ является делителем $0$, так как \mbox{$0=0\times a$}. Из этого же следует, что на ноль делится только ноль.
+	\end{example}
+
+	\begin{lemma}
+	\label{rav}
+		Пусть $a,b\in\mathbb{N}$, тогда если $a\divisible b$ и $b\divisible a$, то $a=b$.
+	\end{lemma}
+	\begin{proof}
+		Действительно, из $a=bq$ и $b=ap$ следует $a=apq$. Тогда с необходимостью $p=q=1$ и $a=b$.
+	\end{proof}
+
+	\begin{lemma}
+	\label{tran}
+		Если $a\divisible m$ и $m\divisible b$, то $a\divisible b$.
+	\end{lemma}
+	\begin{proof}
+		Действительно, из $a=ma_1$ и $m=bm_1$ следует $a=ba_1m_1$.
+	\end{proof}
+
+	\begin{lemma}
+	\label{sum}
+		Если $a+b=c$, $a\divisible m$ и $c\divisible m$, то $b\divisible m$.
+	\end{lemma}
+	\begin{proof}
+		Действительно, из $a=ma_1$ и $c=mc_1$ следует $ma_1+b=mc_1$. Откуда получаем $b=m(c_1-a_1)$.
+	\end{proof}
+
+	\begin{remark}
+		Как очевидное следствие получаем, что если $a\divisible c$ и $b\divisible c$, то $(a+b)\divisible c$. \textbf{\textit{Поймите почему!}}
+	\end{remark}
+
+	\begin{lemma}
+	\label{sokr}
+		$a\divisible b$ тогда и только тогда, когда $ac\divisible bc$.
+	\end{lemma}
+	\begin{proof}
+		Если $a\divisible b$, то $a=bq$. Умножив это равенство на $c$, получим $ac=bcq$, а значит, $ac\divisible bc$.
+		
+		Обратно. Если $ac\divisible bc$, то $ac=bcq$. Сократив это равенство на $c$, получим $a=bq$, а значит, $a\divisible b$.
+	\end{proof}
+
+	\begin{remark}
+		Напомним, что $$|x|=
+		\begin{cases}
+			x,&\text{если $x>0$;}\\
+			0,&\text{если $x=0$;}\\
+			-x,&\text{если $x<0$.}
+		\end{cases}$$
+		Докажите, что если $a\divisible b$, то $a\divisible|b|$ и $|a|\divisible b$.
+	\end{remark}
+
+	\begin{theorem}[о делении с остатком]
+	\label{ost}
+		Пусть $a,b\in\mathbb{Z}$ и $b\neq0$. Тогда существует единственная пара чисел $(q,r)$ такая, что
+		\begin{equation}
+		\label{eq2}
+			a=bq+r,
+		\end{equation}
+		где $0\leqslant r<|b|$.
+	\end{theorem}
+	\begin{proof}
+		\textbf{Существование.} По \href{https://ru.wikipedia.org/wiki/%D0%90%D0%BA%D1%81%D0%B8%D0%BE%D0%BC%D0%B0_%D0%90%D1%80%D1%85%D0%B8%D0%BC%D0%B5%D0%B4%D0%B0}{\textbf{\textit{принципу Архимеда}}} для $b>0$ существует такое число $q$, что $$bq\leqslant a<b(q+1).$$
+		Пусть $r=a-bq$, тогда из предыдущих неравенств следует $$0\leqslant a-bq<b=|b|,$$ то есть $0\leqslant r<|b|$.
+		
+		Аналогично для $b<0$ существует такое число $q$, что $$bq\leqslant a<b(q-1).$$
+		Пусть так же $r=a-bq$, тогда из предыдущих неравенств следует $$0\leqslant a-bq<-b=|b|,$$ то есть $0\leqslant r<|b|$.
+		
+		Таким образом для любого $b\neq0$ получаем, $$bq+r=bq+a-bq=a,$$ где $0\leqslant r<|b|$, что и требовалось.
+		
+		\textbf{Единственность.} Действительно, предположим, что существует ещё одна пара чисел $(q_1,r_1)$ такая, что $a=bq_1+r_1$, где $0\leqslant r_1<|b|$. Вычитая это равенство из равенства (\ref{eq2}), получим
+		\begin{equation}
+		\label{eq4}
+			0=b(q-q_1)+(r-r_1).
+		\end{equation}
+		
+		Из \hyperref[sum]{\textbf{\textit{леммы \ref*{sum}}}} получаем $(r-r_1)\divisible b$. Так как $r<|b|$, получаем
+		\begin{equation}
+		\label{eq3}
+			r-r_1<|b|-r_1.
+		\end{equation}
+		С другой стороны, так как $0\leqslant r_1$, а значит, $-r_1\leqslant 0$, находим \mbox{$|b|-r_1\leqslant |b|$}. И, объединив это неравенство с неравенством (\ref{eq3}), получаем $$r-r_1<|b|-r_1\leqslant |b|,$$ то есть $r-r_1<|b|$. Аналогично устанавливается (\textbf{\textit{установите!}}) $-|b|<r-r_1$. В конечном итоге $$-|b|<r-r_1<|b|.$$
+		
+		Покажем теперь, что $r-r_1=0$. Действительно из $(r-r_1)\divisible|b|$ следует $r-r_1=|b|p$. Если $1\leqslant p$, то $$|b|\leqslant|b|p=r-r_1,$$ что невозможно. Если $p\leqslant-1$, то $$r-r_1=|b|p\leqslant -|b|,$$ что также невозможно. Значит, $p=0$ и, соответственно, $r-r_1=0$, то есть $r=r_1$.
+		
+		В итоге из равенства (\ref{eq4}) получаем $0=b(q-q_1)$ и, так как $b\neq0$, $q-q_1=0$, то есть $q=q_1$, что и требовалось.
+	\end{proof}
+
+	\begin{definition}
+		Число $q$ называется \emph{неполным частным}, а число $r$~---\emph{остатком} от деления $a$ на $b$.
+	\end{definition}
+
+\subsection{Наибольший общий делитель}
+\label{nod}
+	
+	\begin{definition}
+		Число $d\in\mathbb{N}$ называется \emph{общим делителем} чисел $a_1$, $a_2$, \dots, $a_n$, если $a_i\divisible d$ для любого $i=\overline{1,n}$. Наибольшее число из общих делителей этих чисел называется \emph{наибольшим общим делителем} и обозначается $(a_1, a_2, \dots, a_n)$.
+	\end{definition}
+
+	\begin{remark}
+		Здесь и далее $$\mathcal{D}_{a_1, a_2, \dots, a_n}=\{\,d\in\mathbb{N}\mid\forall i=\overline{1,n}\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, $a_2$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\mid a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
+	\end{remark}
+
+	\begin{remark}
+		Чем является множество $\mathcal{D}_0$? Есть ли в нём наибольший элемент? Чему равен $(0,0)$?
+	\end{remark}
+
+	\begin{definition}
+		Числа $a_1$, $a_2$, \dots, $a_n$ называются \emph{взаимно простыми}, если $(a_1, a_2, \dots, a_n)=1$.
+	\end{definition}
+
+	\begin{statement}
+	\label{nodab}
+		Если $a\divisible b$, то $\mathcal{D}_{a,b}=\mathcal{D}_b$, в частности если $b\neq0$, то $(a,b)=|b|$.
+	\end{statement}
+	\begin{remark}
+		Чтобы доказать равенство двух множеств, сперва нужно показать, что $\mathcal{D}_{a,b}\subseteq\mathcal{D}_b$, а затем, что $\mathcal{D}_b\subseteq\mathcal{D}_{a,b}$.
+	\end{remark}
+	\begin{proof}
+		Покажем, что $\mathcal{D}_{a,b}\subseteq\mathcal{D}_b$. Если $d\in\mathcal{D}_{a,b}$, то по определению $a\divisible d$ и $b\divisible d$, а значит, $d\in\mathcal{D}_b$.
+		
+		Покажем теперь, что $\mathcal{D}_b\subseteq\mathcal{D}_{a,b}$. Действительно, если $d\in\mathcal{D}_b$, то $b\divisible d$. И, так как по условию $a\divisible b$, из \hyperref[tran]{\textbf{\textit{леммы \ref*{tran}}}} получаем, что $a\divisible d$, то есть $d\in\mathcal{D}_{a,b}$.
+		
+		Так как $b\neq0$ и $\mathcal{D}_{a,b}=\mathcal{D}_b$, наибольшие элементы этих множеств равны, но $|b|$ и есть наибольший элемент множества $\mathcal{D}_b$ (\textbf{\textit{докажите!}}). Значит, $(a,b)=|b|$.
+	\end{proof}
+
+	\begin{statement}
+	\label{nodabc}
+		Если $a=bq+c$, то $\mathcal{D}_{a,b}=\mathcal{D}_{b,c}$, в частности \mbox{$(a,b)=(b,c)$}.
+	\end{statement}
+	\begin{proof}
+		Действительно, если $d\in\mathcal{D}_{a,b}$, то $a\divisible d$ и $b\divisible d$, а значит, по \hyperref[sum]{\textbf{\textit{лемме \ref*{sum}}}} $c\divisible d$, то есть $d\in\mathcal{D}_{b,c}$. В итоге получаем \mbox{$\mathcal{D}_{a,b}\subseteq\mathcal{D}_{b,c}$}. Аналогично доказывается, что $\mathcal{D}_{b,c}\subseteq\mathcal{D}_{a,b}$. Значит, $\mathcal{D}_{a,b}=\mathcal{D}_{b,c}$.
+		
+		Так как множества общих делителей равны, равны будут и наибольшие в них элементы, то есть $(a,b)=(b,c)$.
+	\end{proof}
+
+	\begin{theorem}[алгоритм Евклида]
+		Пусть $a,b\in\mathbb{Z}$ и $b\neq0$. Тогда, используя \hyperref[ost]{\textbf{\textit{теорему о делении с остатком}}}, получим ряд равенств
+		\begin{equation}
+		\label{eq5}
+		\begin{array}{rcll}
+			a&=&bq+r_1,&0<r_1<|b|;\\
+			b&=&r_1q_1+r_2,&0<r_2<r_1;\\
+			r_1&=&r_2q_2+r_3,&0<r_3<r_2;\\
+			\hdotsfor{4}\\
+			r_{n-2}&=&r_{n-1}q_{n-1}+r_n,&0<r_n<r_{n-1};\\
+			r_{n-1}&=&r_nq_n.
+		\end{array}
+		\end{equation}
+		При этом $(a,b)=r_n$.
+	\end{theorem}
+	\begin{proof}
+		Так как $|b|>r_1>r_2>r_3>\dots\geqslant0$, с необходимостью на каком-то шаге алгоритма возникнет остаток $r_{n+1}=0$, то есть алгоритм закончится.
+		
+		Используя \textbf{\textit{утверждения \ref{nodab} и \ref{nodabc}}}, получаем
+		$$(a,b)=(b,r_1)=(r_1,r_2)=\dots=(r_{n-2},r_{n-1})=(r_{n-1},r_n)=r_n.$$
+	\end{proof}
+
+	\begin{remark}
+		Докажите, что если $r_1=0$, то $(a,b)=|b|$.
+	\end{remark}
+
+	\begin{corollary}
+	\label{mndel}
+		$\mathcal{D}_{a,b}=\mathcal{D}_{(a,b)}$.
+	\end{corollary}
+	\begin{remark}
+		Отсюда очевидно, что наибольший общий делитель делится на любой общий делитель.
+	\end{remark}
+	\begin{proof}
+		Пусть $d\in\mathcal{D}_{a,b}$, тогда $a\divisible d$ и $b\divisible d$, а значит, из равенств (\ref{eq5}) и \hyperref[sum]{\textbf{\textit{леммы \ref*{sum}}}} последовательно получаем
+		$$\begin{array}{cccccc}
+		r_1\divisible d,&r_2\divisible d,&\dots,&r_{n-2}\divisible d,&r_{n-1}\divisible d,&(a,b)=r_n\divisible d,
+		\end{array}$$
+		то есть $d\in\mathcal{D}_{(a,b)}$.
+		
+		Аналогично если $d\in\mathcal{D}_{(a,b)}$, то, используя сначала \hyperref[tran]{\textbf{\textit{лемму \ref*{tran}}}}, последовательно получаем
+		$$\begin{array}{cccccccc}
+			r_n=(a,b)\divisible d,&r_{n-1}\divisible d,&r_{n-2}\divisible d,&\dots,&r_2\divisible d,&r_1\divisible d,&b\divisible d,&a\divisible d,
+		\end{array}$$
+		то есть $d\in\mathcal{D}_{a,b}$.
+	\end{proof}
+
+	\begin{corollary}[соотношение Безу]
+	\label{bezu}
+		Существуют такие числа $u$ и $v$, что $$\boxed{au+bv=(a,b).}$$
+	\end{corollary}
+	\begin{proof}
+		Действительно, из равенств (\ref{eq5}) получаем
+		\begin{align*}
+			(a,b)=r_n&=r_{n-2}-r_{n-1}q_{n-1};\\
+			r_{n-1}&=r_{n-3}-r_{n-2}q_{n-2};\\
+			&\vdots\\
+			r_3&=r_1-r_2q_2;\\
+			r_2&=b-r_1q_1;\\
+			r_1&=a-bq.
+		\end{align*}
+		
+		Заменяя в первом равенстве сначала $r_{n-1}$, затем $r_{n-2}$, \dots, $r_2$, $r_1$ соответствующими равенствами и упрощая выражение, найдём числа $u$ и $v$ такие, что $(a,b)=r_n=au+bv$.
+	\end{proof}
+
+	\begin{example}
+		Найдём такие $u$ и $v$, что $(-78)u+(-66)v=(-78,-66)$. С помощью алгоритма Евклида получаем следующие равенства:
+		\begin{align*}
+				(-78)&=(-66)\times2+54,&0&<54<|-66|=66;\\
+				(-66)&=54\times(-2)+42,&0&<42<54;\\
+				54&=42+12,&0&<12<42;\\
+				42&=12\times3+6,&0&<6<12;\\
+				12&=6\times2.
+		\end{align*}
+		Таким образом, $(-78,-66)=6$. Теперь выразим остатки из полученных равенств:
+		\begin{align*}
+			6&=42+12\times(-3);\\
+			12&=54+42\times(-1);\\
+			42&=(-66)+54\times2;\\
+			54&=(-78)+(-66)\times(-2).
+		\end{align*}
+		Начнём последовательно в первом равенстве заменять остатки:
+		\begin{align*}
+			6=42&+\boxed{12}\times(-3)=\\
+			=42&+\underline{(54+42\times(-1))}\times(-3)=\\
+			=54\times(-3)&+\boxed{42}\times4=\\
+			=54\times(-3)&+\underline{((-66)+54\times2)}\times4=\\
+			=(-66)\times4&+\boxed{54}\times5=\\
+			=(-66)\times4&+\underline{((-78)+(-66)\times(-2))}\times5=\\
+			=\boxed{(-78)}\times5&+\boxed{(-66)}\times(-6).
+		\end{align*}
+		Значит, $u=5$ и $v=-6$.
+	\end{example}
+
+	\begin{statement}
+	\label{vyn}
+		Пусть $m\in\mathbb{N}$, тогда $(am,bm)=(a,b)m$.
+	\end{statement}
+	\begin{proof}
+		Действительно, умножив соотношения (\ref{eq5}) почленно на $m$, получим новые соотношения, где вместо $a$, $b$, $r_1$, $r_2$, \dots, $r_{n-1}$, $r_n$ будут числа
+		$$\begin{array}{ccccccc}
+			am,&bm,&r_1m,&r_2m,&\dots,&r_{n-1}m,&r_nm,
+		\end{array}$$
+		а значит, $(am,bm)=(a,b)m$.
+	\end{proof}
+
+	\begin{statement}
+	\label{delpr}
+		Пусть $d\in\mathcal{D}_{a,b}$, тогда $\left(\frac{a}{d},\frac{b}{d}\right)=\frac{(a,b)}{d}$, в частности $$\boxed{\left(\frac{a}{(a,b)},\frac{b}{(a,b)}\right)=1.}$$
+	\end{statement}
+	\begin{proof}
+		Действительно, из \hyperref[vyn]{\textbf{\textit{утверждения \ref*{vyn}}}} следует $$(a,b)=\left(\frac{a}{d}d,\frac{b}{d}d\right)=\left(\frac{a}{d},\frac{b}{d}\right)d,$$ что и требовалось.
+		
+		Последнее утверждение получается, если в качестве $d$ взять $(a,b)$.
+	\end{proof}
+
+	\begin{statement}
+	\label{vzpr}
+		Если $(a,b)=1$, то $(ac,b)=(c,b)$.
+	\end{statement}
+	\begin{remark}
+		Докажем равенство с помощью \hyperref[rav]{\textbf{\textit{леммы \ref*{rav}}}}, то есть сначала докажем, что $(c,b)\divisible(ac,b)$, а затем, что $(ac,b)\divisible(c,b)$.
+	\end{remark}
+	\begin{proof}
+		Действительно, так как $ac\divisible(ac,b)$ и $b\divisible(ac,b)$, получаем $bc\divisible(ac,b)$. Значит, используя \hyperref[mndel]{\textbf{\textit{следствие \ref*{mndel}}}}, $$(ac,b)\in\mathcal{D}_{ac,bc}=\mathcal{D}_{(ac,bc)}.$$ Отсюда и из \hyperref[vyn]{\textbf{\textit{утверждения \ref*{vyn}}}} следует $|c|=(ac,bc)\divisible(ac,b)$. Значит, $(ac,b)\in\mathcal{D}_{c,b}=\mathcal{D}_{(c,b)}$, то есть $(c,b)\divisible(ac,b)$.
+		
+		Так как $b\divisible(c,b)$ и $c\divisible(c,b)$, получаем $ac\divisible(c,b)$. Значит, $$(c,b)\in\mathcal{D}_{ac,b}=\mathcal{D}_{(ac,b)},$$ то есть $(ac,b)\divisible(c,b)$.
+		
+		В конечном итоге из \hyperref[rav]{\textbf{\textit{леммы \ref*{rav}}}} следует, что $(ac,b)=(c,b)$.
+	\end{proof}
+	\begin{remark}
+		В каком месте доказательства используется $(a,b)=1$?
+	\end{remark}
+
+	\begin{statement}
+	\label{divpr}
+		Если $(a,b)=1$ и $ac\divisible b$, то $c\divisible b$.
+	\end{statement}
+	\begin{proof}
+		Действительно, из \hyperref[nodab]{\textbf{\textit{утверждения \ref*{nodab}}}} следует $$(ac,b)=|b|.$$ С другой стороны, из \hyperref[vzpr]{\textbf{\textit{утверждения \ref*{vzpr}}}} следует $|b|=(ac,b)=(c,b)$, а значит, $c\divisible b$.
+	\end{proof}
+
+	\begin{example}
+		$(5\times14)\divisible7$, значит, $14\divisible7$, так как $(5,7)=1$.
+	\end{example}
+	\begin{example}
+		$(8\times9)\divisible 6$, но $9\not\divisible6$, так как $(8,6)\neq1$.
+	\end{example}
+
+\subsection{Наименьшее общее кратное}
+\label{nok}
+	
+	\begin{definition}
+		Число $m\in\mathbb{N}$ называется \emph{общим кратным} чисел $a_1$, $a_2$, \dots, $a_n$, если $m\divisible a_i$ для любого $i=\overline{1,n}$. Наименьшее число из общих кратных этих чисел называется \emph{наименьшим общим кратным} и обозначается $[a_1, a_2, \dots, a_n]$.
+	\end{definition}
+
+	\begin{remark}
+		Здесь и далее $$\mathcal{M}_{a_1, a_2, \dots, a_n}=\{\,m\in\mathbb{N}\mid\forall i=\overline{1,n}\quad m\divisible a_i\,\}\text{ ---}$$ множество, состоящее из всех общих кратных чисел $a_1$, $a_2$, \dots, $a_n$. Тогда $\mathcal{M}_a=\{\,m\in\mathbb{N}\mid m\divisible a\,\}$ --- множество, состоящее из всех кратных числа $a$.
+	\end{remark}
+
+	\begin{statement}
+		Пусть $d=(a,b)$, тогда число $m$ --- общее кратное чисел $a$ и $b$, если и только если оно представимо в виде
+		\begin{equation}
+		\label{eq6}
+			m=\frac{|ab|}{d}t,
+		\end{equation}
+		где $t\in\mathbb{N}$.
+	\end{statement}
+	\begin{remark}
+		Выше делается два утверждения (\textbf{\textit{«если и только если»!}}):
+		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+			\item любое общее кратное представимо в виде (\ref{eq6});
+			\item любое число вида (\ref{eq6}) является общим кратным.
+		\end{enumerate}
+		Поэтому доказать нужно оба этих утверждения.
+	\end{remark}
+	\begin{proof}
+		Докажем сперва первый пункт \textbf{\textit{замечания}}. Пусть $|a|=da_1$, $|b|=db_1$ и $m$ --- общее кратное $a$ и $b$.
+		
+		Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(a_1,b_1)=1$. Так как $m\divisible a$, $m=|a|k$. С другой стороны, из $m\divisible b$ следует $|a|k\divisible|b|$, а значит, $da_1k\divisible db_1$. Из \hyperref[sokr]{\textbf{\textit{леммы \ref*{sokr}}}} получаем $a_1k\divisible b_1$. В конечном итоге с помощью \hyperref[divpr]{\textbf{\textit{утверждения \ref*{divpr}}}} получаем $k\divisible b_1$, то есть $k=b_1t$, где $t\in\mathbb{N}$ (\textbf{\textit{почему?}}).
+		
+		В итоге получаем $$dm=d|a|k=d|a|b_1t=|ab|t,$$ то есть $m=\frac{|ab|}{d}t$, что и требовалось.
+		
+		Докажем теперь второй пункт \textbf{\textit{замечания}}. Пусть $m=\frac{|ab|}{d}t$, тогда $m=|a|b_1t$, то есть $m\divisible a$. Аналогично показывается, что $m\divisible b$. Значит, $m$~--- общее кратное $a$ и $b$.
+	\end{proof}
+	
+	\begin{theorem}[формула для наименьшего общего кратного]
+		\begin{equation}
+		\label{eq7}
+			\boxed{[a,b]=\frac{|ab|}{(a,b)}.}
+		\end{equation}
+	\end{theorem}
+	\begin{proof}
+		Так как $m=\frac{|ab|}{d}t$ --- общее кратное $a$ и $b$, наименьшее общее кратное $[a,b]$ получается при $t=1$. В итоге получаем формулу $[a,b]=\frac{|ab|}{(a,b)}$.
+	\end{proof}
+
+	\begin{corollary}
+	\label{krat}
+		Пусть $m$ --- общее кратное чисел $a$ и $b$, тогда $$m=[a,b]t,$$ где $t\in\mathbb{N}$.
+	\end{corollary}
+	\begin{remark}
+		Отсюда очевидно, что любое общее кратное делится на наименьшее общее кратное.
+	\end{remark}
+	\begin{proof}
+		Следует из \textbf{\textit{формул \ref{eq6} и \ref{eq7}}}.
+	\end{proof}
+	
+	\begin{statement}
+	\label{mnnok}
+		$\mathcal{M}_{a,b}=\mathcal{M}_{[a,b]}$.
+	\end{statement}
+	\begin{proof}
+		Действительно, если $m\in\mathcal{M}_{a,b}$, то из \hyperref[krat]{\textbf{\textit{следствия~\ref*{krat}}}} получаем $m\divisible[a,b]$, то есть $m\in\mathcal{M}_{[a,b]}$.
+		
+		Обратно, если $m\in\mathcal{M}_{[a,b]}$, то $m\divisible[a,b]$. И, так как $[a,b]\divisible a$, из \hyperref[tran]{\textbf{\textit{леммы~\ref*{tran}}}} получаем $m\divisible a$. Аналогично показывается, что $m\divisible b$. В итоге $m\in\mathcal{M}_{a,b}$.
+	\end{proof}
+
+\newpage
+\section{Сравнение по модулю}
+\label{mod}
+
+	\begin{definition}
+		Пусть $m\in\mathbb{N}$, тогда числа $a$ и $b$ называются \emph{сравнимыми по модулю} $m$, если их остатки от деления на $m$ равны, при этом число $m$ называется \emph{модулем}. Сравнимость чисел $a$ и $b$ по модулю $m$ записывается так: $$\boxed{a\equiv b\pmod{m}.}$$
+	\end{definition}
+
+	\begin{remark}
+		Очевидно, что если $a\equiv b\pmod{m}$ и $b\equiv c\pmod{m}$, то $a\equiv c\pmod{m}$.
+	\end{remark}
+
+	\begin{statement}
+		$a\equiv b\pmod{m}$ в том и только в том случае, когда $(a-b)\divisible m$.
+	\end{statement}
+	\begin{proof}
+		Действительно, из $a\equiv b\pmod{m}$ следует, что \mbox{$a=mq+r$} и $b=mp+r$, где $0\leqslant r<m$. Тогда $$a-b=mq+r-(mp+r)=m(q-p),$$ то есть $(a-b)\divisible m$.
+		
+		Обратно, пусть $(a-b)\divisible m$ и $b=mp+r$, где $0\leqslant r<m$. Покажем, что остатки от деления $a$ и $b$ на $m$ равны. Действительно, из $(a-b)\divisible m$ следует $a-b=mt$, то есть $$a=mt+mp+r=m(t+p)+r,$$ а это и означает, что $a\equiv b\pmod{m}$.
+	\end{proof}
+
+	\begin{remark}
+		Покажите, что $a\equiv b\pmod{m}$ тогда и только тогда, когда $a=b+mt$, где $t\in\mathbb{Z}$.
+	\end{remark}
+
+\subsection{Свойства сравнений}
+\label{prop}
+
+	\begin{statement}
+		Если $a_1\equiv b_1\pmod{m}$ и $a_2\equiv b_2\pmod{m}$, то $a_1+a_2\equiv b_1+b_2\pmod{m}$.
+	\end{statement}
+	\begin{proof}
+		Действительно, из $(a_1-b_1)\divisible m$ и $(a_2-b_2)\divisible m$ следует $$((a_1+a_2)-(b_1+b_2))=((a_1-b_1)+(a_2-b_2))\divisible m,$$ а значит, $a_1+a_2\equiv b_1+b_2\pmod{m}$.
+	\end{proof}
+
+	\begin{remark}
+		Пусть $a_1+b\equiv c\pmod{m}$ и $a_1\equiv a_2\pmod{m}$. Покажите, что тогда $a_2+b\equiv c\pmod{m}$.
+	\end{remark}
+
+	\begin{remark}
+		Покажите, что $a+b\equiv c\pmod{m}$ тогда и только тогда, когда $a\equiv c-b\pmod{m}$.
+	\end{remark}
+
+	\begin{remark}
+		Покажите, что $a\equiv b\pmod{m}$ тогда и только тогда, когда $a+mk\equiv b\pmod{m}$ для любого $k\in\mathbb{Z}$.
+	\end{remark}
+
+	\begin{statement}
+	\label{mult}
+		Если $a_1\equiv b_1\pmod{m}$ и $a_2\equiv b_2\pmod{m}$, то $a_1a_2\equiv b_1b_2\pmod{m}$.
+	\end{statement}
+	\begin{proof}
+		Действительно, $$a_1a_2-b_1b_2=(a_1a_2-a_1b_2)+(a_1b_2-b_1b_2)=a_1(a_2-b_2)+b_2(a_1-b_1)$$ и, так как $(a_1-b_1)\divisible m$, $(a_2-b_2)\divisible m$, $$(a_1a_2-b_1b_2)=(a_1(a_2-b_2)+b_2(a_1-b_1))\divisible m,$$ а значит, $a_1a_2\equiv b_1b_2\pmod{m}$.
+	\end{proof}
+
+	\begin{remark}
+		Пусть $a_1b\equiv c\pmod{m}$ и $a_1\equiv a_2\pmod{m}$. Покажите, что тогда $a_2b\equiv c\pmod{m}$.
+	\end{remark}
+
+	\begin{remark}
+		Покажите, что если $a\equiv b\pmod{m}$, то $a^k\equiv b^k\pmod{m}$ для любого $k\in\mathbb{N}$.
+	\end{remark}
+
+	\begin{remark}
+		Покажите, что если $a\equiv b\pmod{m}$, то $ac\equiv bc\pmod{m}$ для любого $c\in\mathbb{Z}$. 
+	\end{remark}
+
+	\begin{statement}
+		$a\equiv b\pmod{m_1}$ и $a\equiv b\pmod{m_2}$ тогда и только тогда, когда $$a\equiv b\pmod{[m_1,m_2]}.$$
+	\end{statement}
+	\begin{proof}
+		Действительно, из \hyperref[mnnok]{\textbf{\textit{утверждения \ref*{mnnok}}}} следует (\textbf{\textit{про\-верьте!}}), что $(a-b)\divisible m_1$ и $(a-b)\divisible m_2$ тогда и только тогда, когда $(a-b)\divisible[m_1,m_2]$.
+	\end{proof}
+
+\subsection{Свойства, связанные с сокращением}
+\label{skrsr}
+
+	\begin{statement}
+	\label{sokrmod}
+		Если $(d,m)=1$, то $ad\equiv bd\pmod{m}$ тогда и только тогда, когда \mbox{$a\equiv b\pmod{m}$}.
+	\end{statement}
+	\begin{remark}
+		Утверждение состоит в том, что обе части сравнения можно разделить на их общий делитель, если последний взаимно прост с модулем.
+	\end{remark}
+	\begin{proof}
+		Из $(ad-bd)\divisible m$ следует $d(a-b)\divisible m$, а, так как $(d,m)=1$, из \hyperref[divpr]{\textbf{\textit{утверждения \ref*{divpr}}}} следует $(a-b)\divisible m$, что и требовалось.
+		
+		Обратно. Так как $a\equiv b\pmod{m}$ и $d\equiv d\pmod{m}$, из \hyperref[mult]{\textbf{\textit{утверждения \ref*{mult}}}} следует $ad\equiv bd\pmod{m}$.
+		\begin{remark}
+			Условие $(d,m)=1$ не понадобилось для доказательства этой части утверждения.
+		\end{remark}
+	\end{proof}
+
+	\begin{example}
+		$9\equiv15\pmod{6}$, но $3\not\equiv5\pmod{6}$ (общий делитель не взаимно прост с модулем: $(3,6)\neq1$, поэтому \textbf{\textit{сокращать нельзя!}}).
+	\end{example}
+	\begin{example}
+		$5\equiv35\pmod{6}$ (а здесь взаимно прост: $(5,6)=1$, поэтому \textbf{\textit{можем сократить!}}), а значит, $1\equiv7\pmod{6}$.
+	\end{example}
+
+	\begin{statement}
+	\label{sokrmod2}
+		$a\equiv b\pmod{m}$ тогда и только тогда, когда $$ak\equiv bk\pmod{mk}$$ для любого $k\in\mathbb{Z}$.
+	\end{statement}
+	\begin{proof}
+		Из \hyperref[sokr]{\textbf{\textit{леммы \ref*{sokr}}}} следует, что $(a-b)\divisible m$ тогда и только тогда, когда $(ak-bk)\divisible mk$, что и требовалось.
+	\end{proof}
+
+	\begin{remark}
+		Отсюда получаем, что обе части сравнения и модуль можно разделить на любой их общий делитель.
+	\end{remark}
+	
+	\begin{example}
+		$9\equiv15\pmod{6}$, поэтому $3\equiv5\pmod{2}$.
+	\end{example}
+
+	\begin{example}
+		Упростим $50\equiv110\pmod{12}$. Для этого сперва найдём $(50,110,12)=2$ и сократим всё сравнение на $2$, получим $$25\equiv55\pmod{6}.$$ Затем, так как $(25,55)=5$ и $(5,6)=1$, получим $$5\equiv11\pmod{6}.$$ Здесь мы последовательно воспользовались двумя предыдущими утверждениями.
+	\end{example}
+
+	\begin{statement}
+		Если $a\equiv b\pmod{m}$ и $d\in\mathcal{D}_m$, то $a\equiv b\pmod{d}$.
+	\end{statement}
+	\begin{proof}
+		Действительно, так как $(a-b)\divisible m$ и $m\divisible d$, из \hyperref[tran]{\textbf{\textit{леммы \ref*{tran}}}} получаем $(a-b)\divisible d$, что и требовалось.
+	\end{proof}
+
+	\begin{statement}
+	\label{nodsr}
+		Если $a\equiv b\pmod{m}$, то $\mathcal{D}_{a,m}=\mathcal{D}_{b,m}$, в частности $(a,m)=(b,m)$.
+	\end{statement}
+	\begin{proof}
+		Действительно, это следует из \hyperref[nodabc]{\textbf{\textit{утверждения \ref*{nodabc}}}} и $a=b+mt$.
+	\end{proof}
+	\begin{remark}
+		Как очевидное следствие этого утверждения получаем, что если одна часть сравнения и модуль делятся на какое-либо число, то и другая часть сравнения должна делиться на то же число.
+	\end{remark}
+
+\subsection{Классы вычетов}
+\label{sysvych}
+
+	\begin{definition}
+		Множество $$[a]_m=\{\,x\in\mathbb{Z}\mid x\equiv a\pmod{m}\,\}=\{\,x\in\mathbb{Z}\mid x=a+mt\text{, где }t\in\mathbb{Z}\,\}$$ всех чисел, сравнимых с $a$ по модулю $m$, называется \emph{классом вычетов $a$ по модулю $m$}.
+	\end{definition}
+	
+	\begin{remark}
+		Докажите, что $[a]_m=[b]_m$ тогда и только тогда, когда $a\equiv b\pmod{m}$.
+	\end{remark}
+	
+	\begin{remark}
+		Так как каждому остатку по модулю $m$ соответствует свой класс вычетов и на остаток $r$ имеется ограничение $0\leqslant r<m$, количество классов вычетов по модулю $m$ равно количеству различных остатков, то есть $m$.
+	\end{remark}
+	
+	\begin{remark}
+		Обозначим через $\mathcal{P}_m=\{\,0,1,2,\dots,m-1\,\}$ --- множество остатков по модулю $m$, то есть множество, содержащее по одному элементу из каждого класса вычетов по модулю $m$.
+	\end{remark}
+	
+	\begin{statement}
+		Множества $[0]_m$, $[1]_m$, \dots, $[m-1]_m$ образуют \href{https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0}{\textbf{\textit{разбиение множества}}} $\mathbb{Z}$, то есть
+		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+			\item $[0]_m\cup[1]_m\cup\cdots\cup[m-1]_m=\mathbb{Z}$;
+			\item $[p]_m\cap[q]_m=\varnothing$ для любых $p,q\in\mathcal{P}_m$ таких, что $p\neq q$.
+		\end{enumerate}
+	\end{statement}
+	\begin{remark}
+		Утверждение состоит в том, что любое целое число лежит в одном из $m$ классов вычетов и что эти классы попарно не пересекаются.
+	\end{remark}
+	\begin{proof}
+		Докажем сперва первый пункт. Пусть $x\in\mathbb{Z}$, тогда по \hyperref[ost]{\textbf{\textit{теореме о делении с остатком}}} $x=mq+r$, где $0\leqslant r<m$, то есть $x\equiv r\pmod{m}$, а значит, $x\in[r]_m$, где $r\in\mathcal{P}_m$, что и требовалось.
+		
+		Докажем теперь второй пункт. Пусть $x\in[p]_m\cap[q]_m$, тогда $$x\equiv p\pmod{m}\text{ и }x\equiv q\pmod{m},$$ поэтому $p\equiv q\pmod{m}$. Значит, $p=q$ (\textbf{\textit{докажите!}}), так как \mbox{$p,q\in\mathcal{P}_m$}.
+	\end{proof}
+
+	\begin{example}
+		Все классы вычетов по модулю $5$:
+		\begin{align*}
+			[0]_5&=\{\,x\in\mathbb{Z}\mid x\equiv 0\pmod{5}\,\}=\{\,\dots,-10,-5,0,5,10,\dots\,\};\\
+			[1]_5&=\{\,x\in\mathbb{Z}\mid x\equiv 1\pmod{5}\,\}=\{\,\dots,-9,-4,1,6,11,\dots\,\};\\
+			[2]_5&=\{\,x\in\mathbb{Z}\mid x\equiv 2\pmod{5}\,\}=\{\,\dots,-8,-3,2,7,12,\dots\,\};\\
+			[3]_5&=\{\,x\in\mathbb{Z}\mid x\equiv 3\pmod{5}\,\}=\{\,\dots,-7,-2,3,8,13,\dots\,\};\\
+			[4]_5&=\{\,x\in\mathbb{Z}\mid x\equiv 4\pmod{5}\,\}=\{\,\dots,-6,-1,4,9,14,\dots\,\}.
+		\end{align*}
+	\end{example}
+
+\subsection{Сравнения первой степени}
+\label{srx}
+
+	Здесь и далее мы будем решать сравнения вида
+	\begin{equation}
+	\label{eq8}
+		ax\equiv b\pmod{m},
+	\end{equation}
+	где $a,b,m$ --- известные числа и $a\not\equiv0\pmod{m}$, то есть $a\notin[0]_m$.
+	
+	\begin{remark}
+		Если $ax_1\equiv b\pmod{m}$ и $x_2\in[x_1]_m$, то (\textbf{\textit{проверьте!}}) $ax_2\equiv b\pmod{m}$. Это означает, что если $x_1$ удовлетворяет сравнению (\ref{eq8}), то любое число, сравнимое с $x_1$ по модулю $m$, также будет удовлетворять этому сравнению.
+	\end{remark}
+	
+	\begin{definition}
+		Класс вычетов $[x_1]_m$ называется \emph{решением сравнения} (\ref{eq8}), если $ax_1\equiv b\pmod{m}$. При таком соглашении сравнение (\ref{eq8}) будет иметь столько решений, сколько элементов $\mathcal{P}_m$ ему удовлетворяет. 
+	\end{definition}
+
+	\begin{statement}
+	\label{sol}
+		Если $(a,m)=1$, то сравнение $ax\equiv b\pmod{m}$ имеет единственное решение. Более того, если числа $u$ и $v$ такие, что $au+mv=1$, то решением является класс вычетов $[bu]_m$.
+	\end{statement}
+	\begin{remark}
+		Существование таких чисел $u$ и $v$ гарантируется \hyperref[bezu]{\textbf{\textit{теоремой о соотношении Безу}}}.
+	\end{remark}
+	\begin{proof}
+		Докажем сперва, что $[bu]_m$ является решением. Пусть $(b,m)=d$, $b=b_1d$ и $m=m_1d$. Значит, по \hyperref[sokrmod2]{\textbf{\textit{утверждению \ref*{sokrmod2}}}}
+		$$\boxed{abu\equiv b\pmod{m}\text{, если и только если }ab_1u\equiv b_1\pmod{m_1}}.$$
+		Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(b_1,m_1)=1$, поэтому с помощью \hyperref[sokrmod]{\textbf{\textit{утверждения \ref*{sokrmod}}}} получаем
+		$$\boxed{ab_1u\equiv b_1\pmod{m_1}\text{, если и только если }au\equiv1\pmod{m_1}}.$$
+		Так как $au=1-mv=1-m_1dv$, получаем, что
+		$$\boxed{au\equiv1\pmod{m_1}\text{, если и только если }1-m_1dv\equiv1\pmod{m_1}},$$
+		а это выполняется тогда и только тогда, когда $\boxed{1\equiv1\pmod{m_1}}$.
+		
+		Таким образом, мы получили такое утверждение:
+		$$\boxed{abu\equiv b\pmod{m}\text{ тогда и только тогда, когда }1\equiv1\pmod{m_1}}.$$
+		И, так как $1\equiv1\pmod{m_1}$ --- верное утверждение, верным будет и $abu\equiv b\pmod{m}$, что и требовалось.
+		
+		Теперь докажем единственность решения. Пусть $[x_1]_m, [x_2]_m$ --- два решения сравнения. Тогда из $ax_1\equiv b\pmod{m}$ и $ax_2\equiv b\pmod{m}$ следует $ax_1\equiv ax_2\pmod{m}$. Так как $(a,m)=1$, из \hyperref[sokrmod]{\textbf{\textit{утверждения~\ref*{sokrmod}}}} следует $x_1\equiv x_2\pmod{m}$, то есть $[x_1]_m=[x_2]_m$, что и требовалось.
+	\end{proof}
+
+	\begin{example}
+		Решим сравнение $7x\equiv3\pmod{45}$, воспользовавшись предыдущим утверждением, так как $(7,45)=1$. Для этого найдём такие $u$ и $v$, что $7u+45v=1$. Сперва применим алгоритм Евклида:
+		\begin{align*}
+			45&=7\times6+3,&0&\leqslant3<7;\\
+			7&=3\times2+1,&0&\leqslant1<3;\\
+			3&=3\times1.
+		\end{align*}
+		Теперь проделаем процедуру замены остатков:
+		$$\boxed{1=}7-3\times2=7-(45-7\times6)\times2=\boxed{7\times13+45\times(-2)}.$$
+		Значит, $u=13$, а решением будет $[13\times3]_{45}=[39]_{45}$.
+	\end{example}
+
+	\begin{remark}
+		Здесь и далее $$\mathcal{R}_{a,b,m}=\{\,x\in\mathbb{Z}\mid ax\equiv b\pmod{m}\,\}\text{ ---}$$ множество чисел, удовлетворяющих сравнению $ax\equiv b\pmod{m}$.
+	\end{remark}
+
+	\begin{definition}
+		Сравнения $a_1x\equiv b_1\pmod{m_1}$ и $a_2x\equiv b_2\pmod{m_2}$ называются \emph{равносильными}, если $\mathcal{R}_{a_1,b_1,m_1}=\mathcal{R}_{a_2,b_2,m_2}$.
+	\end{definition}
+
+	\begin{statement}
+		Сравнение $ax\equiv b\pmod{m}$, где $(a,m)=d\neq1$,
+		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+			\item не имеет решений, если $b\not\divisible d$;
+			\item имеет ровно $d$ решений, если $b\divisible d$; более того, если числа $u$ и $v$ такие, что $au+mv=d$, то решениями будут классы вычетов $$\left[\frac{bu}{d}\right]_m, \left[\frac{bu+m}{d}\right]_m, \left[\frac{bu+2m}{d}\right]_m, \dots, \left[\frac{bu+(d-1)m}{d}\right]_m.$$
+		\end{enumerate}
+	\end{statement}
+	\begin{proof}
+		Первый пункт напрямую следует из \hyperref[nodsr]{\textbf{\textit{утверждения \ref*{nodsr}}}}.
+		
+		Займёмся вторым пунктом. Пусть $a=a_1d$, $b=b_1d$ и $m=m_1d$. Из \hyperref[sokrmod2]{\textbf{\textit{утверждения \ref*{sokrmod2}}}} следует
+		$$\boxed{ax\equiv b\pmod{m}\text{, если и только если }a_1x\equiv b_1\pmod{m_1}}.$$
+		Значит (\textbf{\textit{проверьте!}}), $\mathcal{R}_{a,b,m}=\mathcal{R}_{a_1,b_1,m_1}$. Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(a_1,m_1)=1$, а значит, сравнение $a_1x\equiv b_1\pmod{m_1}$ имеет единственное решение $[x_1]_{m_1}$. Без ограничения общности будем считать, что $x_1\in\mathcal{P}_{m_1}$, то есть $0\leqslant x_1<m_1$. Исходное сравнение имеет столько решений, сколько элементов
+		$$[x_1]_{m_1}=\{\,x\in\mathbb{Z}\mid x=x_1+m_1t\text{, где }t\in\mathbb{Z}\,\}.$$
+		содержится в множестве $\mathcal{P}_m$.
+		
+		Чтобы $x=x_1+m_1t$ принадлежал множеству $\mathcal{P}_m$, необходимо $$0\leqslant x_1+m_1t<m.$$ Если $t\leqslant-1$, то $$x_1+m_1t\leqslant x_1-m_1<0,$$ что не подходит. Если $d\leqslant t$, то $$m\leqslant x_1+m=x_1+m_1d\leqslant x_1+m_1t,$$ что также не подходит. Если $0\leqslant t\leqslant d-1$, то
+		$$\boxed{0\leqslant}x_1\leqslant\boxed{x_1+m_1t}\leqslant x_1+m_1(d-1)\boxed{<}m_1+m_1(d-1)=m_1d=\boxed{m}.$$
+		
+		Таким образом, на $t$ возникает ограничение $0\leqslant t\leqslant d-1$. Каждому значению $t$ из этого промежутка соответствует свой элемент $\mathcal{P}_m$, равный $x_1+m_1t$. И, так как каждому элементу $\mathcal{P}_m$ отвечает своё решение, получаем $d$ решений исходного сравнения:
+		$$\begin{array}{ccccc}
+			[x_1]_m,&[x_1+m_1]_m,&[x_1+2m_1]_m,&\dots,&[x_1+(d-1)m_1]_m.
+		\end{array}$$
+		
+		Заметим, что $au+mv=d$, если и только если \mbox{$a_1u+m_1v=1$}. Воспользовавшись формулой из \hyperref[sol]{\textbf{\textit{утверждения \ref*{sol}}}}, получим все решения исходного сравнения:
+		$$\begin{array}{ccccc}
+			[b_1u]_m,&[b_1u+m_1]_m,&[b_1u+2m_1]_m,&\dots,&[b_1u+(d-1)m_1]_m.
+		\end{array}$$
+		Домножив и поделив на $d$, окончательно получим:
+		$$\left[\frac{bu}{d}\right]_m, \left[\frac{bu+m}{d}\right]_m, \left[\frac{bu+2m}{d}\right]_m, \dots, \left[\frac{bu+(d-1)m}{d}\right]_m.$$
+	\end{proof}
+
+	\begin{example}
+		Решим сравнение $6x\equiv15\pmod{45}$. Это сравнение имеет $3$ решения, так как $d=(6,45)=3$ и $15\divisible3$. Найдём такие, числа $u$ и $v$, что $6u+45v=3$.
+		\begin{align*}
+			45&=6\times7+3,&0&\leqslant3<6;\\
+			6&=3\times2.
+		\end{align*}
+		Значит, $3=6\times(-7)+45$, то есть $u=-7$. Получим следующие решения:
+		\begin{align*}
+			[10]_{45}&=\left[\frac{15\times(-7)}{3}\right]_{45},\\
+			[25]_{45}&=\left[\frac{15\times(-7)+45}{3}\right]_{45},\\
+			[40]_{45}&=\left[\frac{15\times(-7)+2\times45}{3}\right]_{45}.
+		\end{align*}
+	\end{example}
+	
+	\begin{remark}
+		Можно было решить это сравнение, не используя готовые формулы. Сократив всё сравнение на $3$, получаем
+		$$2x\equiv5\pmod{15}.$$
+		Найдя его решение, равное $[10]_{15}$, все решения исходного сравнения получаем, прибавляя с каждым разом $15$, то есть
+		$$\begin{array}{ccc}
+			[10]_{45},&[10+15]_{45}=[25]_{45},&[10+15\times2]_{45}=[40]_{45}.
+		\end{array}$$
+	\end{remark}
+	
+\end{document}
