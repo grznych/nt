@@ -15,6 +15,7 @@
 \newtheorem{statement}{Утверждение}
 
 \newcommand{\divisible}{\mathop{\vdots}}
+\DeclareMathOperator{\sgn}{sgn}
 
 \title{Элементы теории чисел}
 \author{grznych}
@@ -32,7 +33,25 @@
 	\emph{Целые числа} включают в себя числа натуральные ($\mathbb{N}$), противоположные к натуральным (отрицательные) и ноль. Как обычно, множество целых чисел будем обозначать символом $\mathbb{Z}$, а принадлежность числа $x$ множеству целых чисел будем обозначать выражением $x\in\mathbb{Z}$. Все числа здесь и дальше считаются целыми, если не сказано обратное.
 	
 	Основные свойства целых чисел и операций (сложение, вычитание, умножение, деление) над ними будем считать уже известными. Таким образом, если $a,b\in\mathbb{Z}$, то $a+b\in\mathbb{Z}$, $a-b\in\mathbb{Z}$, $ab\in\mathbb{Z}$, однако $\frac{a}{b}$ может быть как целым, так и не целым.
-	
+
+	\begin{remark}
+		Напомним, что $$|x|=
+		\begin{cases}
+			x,&\text{если $x\geqslant0$;}\\
+			-x,&\text{если $x<0$.}
+		\end{cases}$$
+		$$\sgn(x)=
+		\begin{cases}
+			1,&\text{если $x>0$;}\\
+			0,&\text{если $x=0$;}\\
+			-1,&\text{если $x<0$.}
+		\end{cases}$$
+
+		Проверьте, что $x=\sgn(x)|x|$ и $|x|=\sgn(x)x$.
+		
+		Докажите, что $|a|<x$ тогда и только тогда, когда $-x<a<x$.
+	\end{remark}
+
 \subsection{Деление с остатком}
 \label{subsection:del}
 	
@@ -49,36 +68,54 @@
 	\end{example}
 
 	\begin{lemma}
-	\label{rav}
-		Пусть $a,b\in\mathbb{N}$, тогда если $a\divisible b$ и $b\divisible a$, то $a=b$.
+	\label{geq}
+		Если $a\divisible b$ и $a\neq0$, то $|a|\geqslant|b|$.
 	\end{lemma}
 	\begin{proof}
-		Действительно, из $a=bq$ и $b=ap$ следует $a=apq$. Тогда с необходимостью $p=q=1$ и $a=b$.
+		Действительно, из $a=bq$ и $a\neq0$ следует, что $|q|\geqslant1$. Значит, $|a|=|b||q|\geqslant|b|$.
+	\end{proof}
+
+	\begin{lemma}
+	\label{leq}
+		Если $a\divisible b$ и $|a|<|b|$, то $a=0$.
+	\end{lemma}
+	\begin{proof}
+		Так как $|a|=|b||q|<|b|$, то, сократив неравенство на $|b|$, получим $|q|<1$, то есть $q=0$. Значит, $a=0$.
+	\end{proof}
+
+	\begin{lemma}
+	\label{rav}
+		$a\divisible b$ и $b\divisible a$ тогда и только тогда, когда $|a|=|b|$.
+	\end{lemma}
+	\begin{proof}
+		Если $a\neq0$, то $b\neq0$. Тогда из \hyperref[geq]{\textbf{\textit{леммы \ref*{geq}}}} следует, что $|a|\geqslant|b|$ и $|b|\geqslant|a|$, то есть $|a|=|b|$.
+		
+		Если $a=0$, то с необходимостью $b=0$, то есть $|a|=|b|$.
 	\end{proof}
 
 	\begin{lemma}
 	\label{tran}
-		Если $a\divisible m$ и $m\divisible b$, то $a\divisible b$.
+		Если $a\divisible b$ и $b\divisible c$, то $a\divisible c$.
 	\end{lemma}
 	\begin{proof}
-		Действительно, из $a=ma_1$ и $m=bm_1$ следует $a=ba_1m_1$.
+		Из $a=ba_1$ и $b=cb_1$ следует, что $a=c(b_1a_1)$.
 	\end{proof}
 
 	\begin{lemma}
 	\label{sum}
-		Если $a+b=c$, $a\divisible m$ и $c\divisible m$, то $b\divisible m$.
+		Если $a\divisible c$ и $b\divisible c$, то $(a\pm b)\divisible c$.
 	\end{lemma}
 	\begin{proof}
-		Действительно, из $a=ma_1$ и $c=mc_1$ следует $ma_1+b=mc_1$. Откуда получаем $b=m(c_1-a_1)$.
+		Действительно, из $a=ca_1$ и $b=cb_1$ следует, что $a\pm b=c(a_1\pm b_1)$.
 	\end{proof}
 
 	\begin{remark}
-		Как очевидное следствие получаем, что если $a\divisible c$ и $b\divisible c$, то $(a+b)\divisible c$. \textbf{\textit{Поймите почему!}}
+		Аналогично доказывается, что если $a\divisible c$ и $b\divisible c$, то $(ab)\divisible c$.
 	\end{remark}
 
 	\begin{lemma}
 	\label{sokr}
-		$a\divisible b$ тогда и только тогда, когда $ac\divisible bc$.
+		$a\divisible b$ тогда и только тогда, когда $ac\divisible bc$ и $c\neq0$.
 	\end{lemma}
 	\begin{proof}
 		Если $a\divisible b$, то $a=bq$. Умножив это равенство на $c$, получим $ac=bcq$, а значит, $ac\divisible bc$.
@@ -86,50 +123,29 @@
 		Обратно. Если $ac\divisible bc$, то $ac=bcq$. Сократив это равенство на $c$, получим $a=bq$, а значит, $a\divisible b$.
 	\end{proof}
 
-	\begin{remark}
-		Напомним, что $$|x|=
-		\begin{cases}
-			x,&\text{если $x>0$;}\\
-			0,&\text{если $x=0$;}\\
-			-x,&\text{если $x<0$.}
-		\end{cases}$$
-		Докажите, что если $a\divisible b$, то $a\divisible|b|$ и $|a|\divisible b$.
-	\end{remark}
-
 	\begin{theorem}[о делении с остатком]
 	\label{ost}
-		Пусть $a,b\in\mathbb{Z}$ и $b\neq0$. Тогда существует единственная пара чисел $(q,r)$ такая, что
-		\begin{equation}
-		\label{eq2}
-			a=bq+r,
-		\end{equation}
-		где $0\leqslant r<|b|$.
+		Пусть $a,b\in\mathbb{Z}$ и $b\neq0$. Тогда существует единственная пара чисел $(q,r)$ такая, что $a=bq+r$, где $0\leqslant r<|b|$.
 	\end{theorem}
 	\begin{proof}
-		\textbf{Существование.} По \href{https://ru.wikipedia.org/wiki/%D0%90%D0%BA%D1%81%D0%B8%D0%BE%D0%BC%D0%B0_%D0%90%D1%80%D1%85%D0%B8%D0%BC%D0%B5%D0%B4%D0%B0}{\textbf{\textit{принципу Архимеда}}} для $b>0$ существует такое число $q$, что $$bq\leqslant a<b(q+1).$$
-		Пусть $r=a-bq$, тогда из предыдущих неравенств следует $$0\leqslant a-bq<b=|b|,$$ то есть $0\leqslant r<|b|$.
+		\textbf{Существование.} По \href{https://ru.wikipedia.org/wiki/%D0%90%D0%BA%D1%81%D0%B8%D0%BE%D0%BC%D0%B0_%D0%90%D1%80%D1%85%D0%B8%D0%BC%D0%B5%D0%B4%D0%B0}{\textbf{\textit{принципу Архимеда}}} для $|b|>0$ существует такое число $p$, что $$|b|p\leqslant a<|b|(p+1).$$
+		Пусть $q=\sgn(b)p$ и $r=a-bq=a-|b|p$, тогда из предыдущих неравенств следует $$0\leqslant a-|b|p<|b|,$$ то есть $0\leqslant r<|b|$ и $a=bq+r$.
 		
-		Аналогично для $b<0$ существует такое число $q$, что $$bq\leqslant a<b(q-1).$$
-		Пусть так же $r=a-bq$, тогда из предыдущих неравенств следует $$0\leqslant a-bq<-b=|b|,$$ то есть $0\leqslant r<|b|$.
-		
-		Таким образом для любого $b\neq0$ получаем, $$bq+r=bq+a-bq=a,$$ где $0\leqslant r<|b|$, что и требовалось.
-		
-		\textbf{Единственность.} Действительно, предположим, что существует ещё одна пара чисел $(q_1,r_1)$ такая, что $a=bq_1+r_1$, где $0\leqslant r_1<|b|$. Вычитая это равенство из равенства (\ref{eq2}), получим
+		\textbf{Единственность.} Действительно, предположим, что существует ещё одна пара чисел $(q_1,r_1)$ такая, что $a=bq_1+r_1$, где $0\leqslant r_1<|b|$. Отсюда получаем, что $bq+r=bq_1+r_1$, то есть
 		\begin{equation}
 		\label{eq4}
-			0=b(q-q_1)+(r-r_1).
+			r-r_1=b(q_1-q).
 		\end{equation}
-		
-		Из \hyperref[sum]{\textbf{\textit{леммы \ref*{sum}}}} получаем $(r-r_1)\divisible b$. Так как $r<|b|$, получаем
+		Значит, $(r-r_1)\divisible b$. Так как $r<|b|$ и $r_1<|b|$, получаем
 		\begin{equation}
 		\label{eq3}
-			r-r_1<|b|-r_1.
+			r-|b|<r-r_1<|b|-r_1.
 		\end{equation}
-		С другой стороны, так как $0\leqslant r_1$, а значит, $-r_1\leqslant 0$, находим \mbox{$|b|-r_1\leqslant |b|$}. И, объединив это неравенство с неравенством (\ref{eq3}), получаем $$r-r_1<|b|-r_1\leqslant |b|,$$ то есть $r-r_1<|b|$. Аналогично устанавливается (\textbf{\textit{установите!}}) $-|b|<r-r_1$. В конечном итоге $$-|b|<r-r_1<|b|.$$
+		С другой стороны, так как $0\leqslant r$ и $-r_1\leqslant0$, находим $-|b|\leqslant r-|b|$ и $|b|-r_1\leqslant |b|$. И, объединив эти неравенства с неравенствами (\ref{eq3}), получаем $$-|b|\leqslant r-|b|<r-r_1<|b|-r_1\leqslant |b|,$$ то есть $-|b|<r-r_1<|b|$, а значит, $|r-r_1|<|b|$.
+
+		Тогда из \hyperref[leq]{\textbf{\textit{леммы \ref*{leq}}}} получаем $r-r_1=0$, то есть $r=r_1$.
 		
-		Покажем теперь, что $r-r_1=0$. Действительно из $(r-r_1)\divisible|b|$ следует $r-r_1=|b|p$. Если $1\leqslant p$, то $$|b|\leqslant|b|p=r-r_1,$$ что невозможно. Если $p\leqslant-1$, то $$r-r_1=|b|p\leqslant -|b|,$$ что также невозможно. Значит, $p=0$ и, соответственно, $r-r_1=0$, то есть $r=r_1$.
-		
-		В итоге из равенства (\ref{eq4}) получаем $0=b(q-q_1)$ и, так как $b\neq0$, $q-q_1=0$, то есть $q=q_1$, что и требовалось.
+		В итоге из равенства (\ref{eq4}) получаем $0=b(q_1-q)$ и, так как $b\neq0$, $q_1-q=0$, то есть $q=q_1$, что и требовалось.
 	\end{proof}
 
 	\begin{definition}
