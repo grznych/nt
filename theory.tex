@@ -10,6 +10,7 @@
 \newtheorem*{definition}{Определение}
 \newtheorem{lemma}{Лемма}
 \newtheorem*{remark}{Замечание}
+\newtheorem*{desig}{Обозначение}
 \newtheorem{example}{Пример}
 \newtheorem{corollary}{Следствие}[theorem]
 \newtheorem{statement}{Утверждение}
@@ -30,7 +31,7 @@
 \section{Основные понятия и теоремы}
 \label{section:osn}
 	
-	\emph{Целые числа} включают в себя числа натуральные ($\mathbb{N}$), противоположные к натуральным (отрицательные) и ноль. Как обычно, множество целых чисел будем обозначать символом $\mathbb{Z}$, а принадлежность числа $x$ множеству целых чисел будем обозначать выражением $x\in\mathbb{Z}$. Все числа здесь и дальше считаются целыми, если не сказано обратное.
+	\emph{Целые числа} включают в себя числа натуральные ($\mathbb{N}$), противоположные к натуральным (отрицательные) и ноль. Как обычно, множество целых чисел будем обозначать символом $\mathbb{Z}$, а принадлежность числа $x$ множеству целых чисел будем обозначать выражением $x\in\mathbb{Z}$. Все числа здесь и далее считаются целыми, если не сказано обратное.
 	
 	Основные свойства целых чисел и операций (сложение, вычитание, умножение, деление) над ними будем считать уже известными. Таким образом, если $a,b\in\mathbb{Z}$, то $a+b\in\mathbb{Z}$, $a-b\in\mathbb{Z}$, $ab\in\mathbb{Z}$, однако $\frac{a}{b}$ может быть как целым, так и не целым.
 
@@ -56,12 +57,12 @@
 \label{subsection:del}
 	
 	\begin{definition}[делимость]
-		Если $\frac{a}{b}$ целое, то мы говорим, что $a$ \emph{делится на} $b$ (обозначение $a\divisible b$) или что $b$ \emph{делит} $a$ (обозначение $b\mid a$). Таким образом, $a=bq$, где $q=\frac{a}{b}\in\mathbb{Z}$, то есть $a$ \emph{представляется произведением $b$ на целое}. При этом $a$ будем называть \emph{кратным} числа $b$, а $b$ --- \emph{делителем} числа $a$.
+		$a$ \emph{делится на} $b$ ($b$ \emph{делит} $a$), если существует такое целое число $q$, что $a=bq$.
 	\end{definition}
 
-	\begin{remark}
-		Очевидно, что $a\divisible b$ тогда и только тогда, когда $a=bq$, где $q\in\mathbb{Z}$.
-	\end{remark}
+	\begin{desig}
+		$a\divisible b$ ($b\mid a$).
+	\end{desig}
 	
 	\begin{example}
 		Любое целое число $a$ является делителем $0$, так как \mbox{$0=0\times a$}. Из этого же следует, что на ноль делится только ноль.
@@ -136,7 +137,7 @@
 		\label{eq4}
 			r-r_1=b(q_1-q).
 		\end{equation}
-		Значит, $(r-r_1)\divisible b$. Так как $r<|b|$ и $r_1<|b|$, получаем
+		Значит, $(r-r_1)\divisible b$. Так как $-|b|<-r_1$ и $r<|b|$, получаем
 		\begin{equation}
 		\label{eq3}
 			r-|b|<r-r_1<|b|-r_1.
@@ -155,25 +156,29 @@
 \subsection{Наибольший общий делитель}
 \label{nod}
 	
+	\begin{desig}
+		Здесь и далее $\mathbb{N}_n=\{\,1,\dots,n\,\}$.
+	\end{desig}
+	
 	\begin{definition}
-		Число $d\in\mathbb{N}$ называется \emph{общим делителем} чисел $a_1$, $a_2$, \dots, $a_n$, если $a_i\divisible d$ для любого $i=\overline{1,n}$. Наибольшее число из общих делителей этих чисел называется \emph{наибольшим общим делителем} и обозначается $(a_1, a_2, \dots, a_n)$.
+		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $d\in\mathbb{N}$ называется \emph{общим делителем} чисел \mbox{$a_1$, \dots, $a_n$}, если $a_i\divisible d$ для любого $i\in\mathbb{N}_n$. Наибольшее число из общих делителей этих чисел называется \emph{наибольшим общим делителем} и обозначается $(a_1,\dots,a_n)$.
 	\end{definition}
 
-	\begin{remark}
-		Здесь и далее $$\mathcal{D}_{a_1, a_2, \dots, a_n}=\{\,d\in\mathbb{N}\mid\forall i=\overline{1,n}\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, $a_2$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\mid a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
-	\end{remark}
+	\begin{desig}
+		Здесь и далее $$\mathcal{D}_{a_1,\dots,a_n}=\{\,d\in\mathbb{N}\:\mid\:\forall i\in\mathbb{N}_n\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\:\mid\:a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
+	\end{desig}
 
 	\begin{remark}
 		Чем является множество $\mathcal{D}_0$? Есть ли в нём наибольший элемент? Чему равен $(0,0)$?
 	\end{remark}
 
 	\begin{definition}
-		Числа $a_1$, $a_2$, \dots, $a_n$ называются \emph{взаимно простыми}, если $(a_1, a_2, \dots, a_n)=1$.
+		Числа $a_1$, \dots, $a_n$ называются \emph{взаимно простыми}, если $(a_1,\dots,a_n)=1$.
 	\end{definition}
 
 	\begin{statement}
 	\label{nodab}
-		Если $a\divisible b$, то $\mathcal{D}_{a,b}=\mathcal{D}_b$, в частности если $b\neq0$, то $(a,b)=|b|$.
+		Если $a\divisible b$, то $\mathcal{D}_{a,b}=\mathcal{D}_b$, в частности $(a,b)=|b|$.
 	\end{statement}
 	\begin{remark}
 		Чтобы доказать равенство двух множеств, сперва нужно показать, что $\mathcal{D}_{a,b}\subseteq\mathcal{D}_b$, а затем, что $\mathcal{D}_b\subseteq\mathcal{D}_{a,b}$.
@@ -183,7 +188,7 @@
 		
 		Покажем теперь, что $\mathcal{D}_b\subseteq\mathcal{D}_{a,b}$. Действительно, если $d\in\mathcal{D}_b$, то $b\divisible d$. И, так как по условию $a\divisible b$, из \hyperref[tran]{\textbf{\textit{леммы \ref*{tran}}}} получаем, что $a\divisible d$, то есть $d\in\mathcal{D}_{a,b}$.
 		
-		Так как $b\neq0$ и $\mathcal{D}_{a,b}=\mathcal{D}_b$, наибольшие элементы этих множеств равны, но $|b|$ и есть наибольший элемент множества $\mathcal{D}_b$ (\textbf{\textit{докажите!}}). Значит, $(a,b)=|b|$.
+		Так как $\mathcal{D}_{a,b}=\mathcal{D}_b$, наибольшие элементы этих множеств равны, но из \hyperref[geq]{\textbf{\textit{леммы \ref*{geq}}}} следует, что $|b|$ и есть наибольший элемент множества $\mathcal{D}_b$ (\textbf{\textit{проверьте!}}). Значит, $(a,b)=|b|$.
 	\end{proof}
 
 	\begin{statement}
@@ -209,18 +214,15 @@
 			r_{n-1}&=&r_nq_n.
 		\end{array}
 		\end{equation}
-		При этом $(a,b)=r_n$.
+		При этом $\mathcal{D}_{a,b}=\mathcal{D}_{r_n}$ и $(a,b)=r_n$.
 	\end{theorem}
 	\begin{proof}
 		Так как $|b|>r_1>r_2>r_3>\dots\geqslant0$, с необходимостью на каком-то шаге алгоритма возникнет остаток $r_{n+1}=0$, то есть алгоритм закончится.
 		
 		Используя \textbf{\textit{утверждения \ref{nodab} и \ref{nodabc}}}, получаем
-		$$(a,b)=(b,r_1)=(r_1,r_2)=\dots=(r_{n-2},r_{n-1})=(r_{n-1},r_n)=r_n.$$
+		$$\mathcal{D}_{a,b}=\mathcal{D}_{b,r_1}=\mathcal{D}_{r_1,r_2}=\dots=\mathcal{D}_{r_{n-2},r_{n-1}}=\mathcal{D}_{r_{n-1},r_n}=\mathcal{D}_{r_n},$$
+		а значит, $(a,b)=r_n$.
 	\end{proof}
-
-	\begin{remark}
-		Докажите, что если $r_1=0$, то $(a,b)=|b|$.
-	\end{remark}
 
 	\begin{corollary}
 	\label{mndel}
@@ -229,19 +231,6 @@
 	\begin{remark}
 		Отсюда очевидно, что наибольший общий делитель делится на любой общий делитель.
 	\end{remark}
-	\begin{proof}
-		Пусть $d\in\mathcal{D}_{a,b}$, тогда $a\divisible d$ и $b\divisible d$, а значит, из равенств (\ref{eq5}) и \hyperref[sum]{\textbf{\textit{леммы \ref*{sum}}}} последовательно получаем
-		$$\begin{array}{cccccc}
-		r_1\divisible d,&r_2\divisible d,&\dots,&r_{n-2}\divisible d,&r_{n-1}\divisible d,&(a,b)=r_n\divisible d,
-		\end{array}$$
-		то есть $d\in\mathcal{D}_{(a,b)}$.
-		
-		Аналогично если $d\in\mathcal{D}_{(a,b)}$, то, используя сначала \hyperref[tran]{\textbf{\textit{лемму \ref*{tran}}}}, последовательно получаем
-		$$\begin{array}{cccccccc}
-			r_n=(a,b)\divisible d,&r_{n-1}\divisible d,&r_{n-2}\divisible d,&\dots,&r_2\divisible d,&r_1\divisible d,&b\divisible d,&a\divisible d,
-		\end{array}$$
-		то есть $d\in\mathcal{D}_{a,b}$.
-	\end{proof}
 
 	\begin{corollary}[соотношение Безу]
 	\label{bezu}
@@ -349,12 +338,12 @@
 \label{nok}
 	
 	\begin{definition}
-		Число $m\in\mathbb{N}$ называется \emph{общим кратным} чисел $a_1$, $a_2$, \dots, $a_n$, если $m\divisible a_i$ для любого $i=\overline{1,n}$. Наименьшее число из общих кратных этих чисел называется \emph{наименьшим общим кратным} и обозначается $[a_1, a_2, \dots, a_n]$.
+		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $m\in\mathbb{N}$ называется \emph{общим кратным} чисел \mbox{$a_1$, \dots, $a_n$}, если $m\divisible a_i$ для любого $i\in\mathbb{N}_n$. Наименьшее число из общих кратных этих чисел называется \emph{наименьшим общим кратным} и обозначается $[a_1,\dots,a_n]$.
 	\end{definition}
-
-	\begin{remark}
-		Здесь и далее $$\mathcal{M}_{a_1, a_2, \dots, a_n}=\{\,m\in\mathbb{N}\mid\forall i=\overline{1,n}\quad m\divisible a_i\,\}\text{ ---}$$ множество, состоящее из всех общих кратных чисел $a_1$, $a_2$, \dots, $a_n$. Тогда $\mathcal{M}_a=\{\,m\in\mathbb{N}\mid m\divisible a\,\}$ --- множество, состоящее из всех кратных числа $a$.
-	\end{remark}
+	
+	\begin{desig}
+		Здесь и далее $$\mathcal{M}_{a_1,\dots,a_n}=\{\,m\in\mathbb{N}\:\mid\:\forall i\in\mathbb{N}_n\quad m\divisible a_i\,\}\text{ ---}$$ множество, состоящее из всех общих кратных чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{M}_a=\{\,m\in\mathbb{N}\:\mid\:m\divisible a\,\}$ --- множество, состоящее из всех кратных числа $a$.
+	\end{desig}
 
 	\begin{statement}
 		Пусть $d=(a,b)$, тогда число $m$ --- общее кратное чисел $a$ и $b$, если и только если оно представимо в виде
