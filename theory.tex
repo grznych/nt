@@ -168,10 +168,6 @@
 		Здесь и далее $$\mathcal{D}_{a_1,\dots,a_n}=\{\,d\in\mathbb{N}\:\mid\:\forall i\in\mathbb{N}_n\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\:\mid\:a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
 	\end{desig}
 
-	\begin{remark}
-		Чем является множество $\mathcal{D}_0$? Есть ли в нём наибольший элемент? Чему равен $(0,0)$?
-	\end{remark}
-
 	\begin{definition}
 		Числа $a_1$, \dots, $a_n$ называются \emph{взаимно простыми}, если $(a_1,\dots,a_n)=1$.
 	\end{definition}
@@ -437,18 +433,6 @@
 		Действительно, из $(a_1-b_1)\divisible m$ и $(a_2-b_2)\divisible m$ следует $$((a_1+a_2)-(b_1+b_2))=((a_1-b_1)+(a_2-b_2))\divisible m,$$ а значит, $a_1+a_2\equiv b_1+b_2\pmod{m}$.
 	\end{proof}
 
-	\begin{remark}
-		Пусть $a_1+b\equiv c\pmod{m}$ и $a_1\equiv a_2\pmod{m}$. Покажите, что тогда $a_2+b\equiv c\pmod{m}$.
-	\end{remark}
-
-	\begin{remark}
-		Покажите, что $a+b\equiv c\pmod{m}$ тогда и только тогда, когда $a\equiv c-b\pmod{m}$.
-	\end{remark}
-
-	\begin{remark}
-		Покажите, что $a\equiv b\pmod{m}$ тогда и только тогда, когда $a+mk\equiv b\pmod{m}$ для любого $k\in\mathbb{Z}$.
-	\end{remark}
-
 	\begin{statement}
 	\label{mult}
 		Если $a_1\equiv b_1\pmod{m}$ и $a_2\equiv b_2\pmod{m}$, то $a_1a_2\equiv b_1b_2\pmod{m}$.
@@ -458,15 +442,7 @@
 	\end{proof}
 
 	\begin{remark}
-		Пусть $a_1b\equiv c\pmod{m}$ и $a_1\equiv a_2\pmod{m}$. Покажите, что тогда $a_2b\equiv c\pmod{m}$.
-	\end{remark}
-
-	\begin{remark}
 		Покажите, что если $a\equiv b\pmod{m}$, то $a^k\equiv b^k\pmod{m}$ для любого $k\in\mathbb{N}$.
-	\end{remark}
-
-	\begin{remark}
-		Покажите, что если $a\equiv b\pmod{m}$, то $ac\equiv bc\pmod{m}$ для любого $c\in\mathbb{Z}$. 
 	\end{remark}
 
 	\begin{statement}
@@ -475,6 +451,19 @@
 	\begin{proof}
 		Действительно, из \hyperref[mnnok]{\textbf{\textit{утверждения \ref*{mnnok}}}} следует (\textbf{\textit{про\-верьте!}}), что $(a-b)\divisible m_1$ и $(a-b)\divisible m_2$ тогда и только тогда, когда $(a-b)\divisible[m_1,m_2]$.
 	\end{proof}
+
+	\begin{example}
+		Вычислим остаток $13^{16}-2^{55}\times5^{15}$ от деления на $3$.
+		$$13^{16}-2^{55}\times5^{15}\equiv1^{16}-(-1)^{55}\times(-1)^{15}=1-1=0\pmod{3}.$$
+	\end{example}
+
+	\begin{example}
+		Вычислим остаток $(116+17^{17})^{21}\times7^{49}$ от деления на $8$.
+		\begin{align*}
+			(116+17^{17})^{21}\times7^{49}&\equiv(4+1^{17})^{21}\times(-1)^{49}=\\
+			=-5^{21}=-5\times25^{10}&\equiv3\times1^{10}=3\pmod{8}
+		\end{align*}
+	\end{example}
 
 \subsection{Свойства, связанные с сокращением}
 \label{skrsr}
@@ -504,7 +493,7 @@
 
 	\begin{statement}
 	\label{sokrmod2}
-		$a\equiv b\pmod{m}$ тогда и только тогда, когда $$ak\equiv bk\pmod{mk}$$ для любого $k\in\mathbb{Z}$.
+		$a\equiv b\pmod{m}$ тогда и только тогда, когда $$ak\equiv bk\pmod{mk}$$ для любого $k\neq0$.
 	\end{statement}
 	\begin{proof}
 		Из \hyperref[sokr]{\textbf{\textit{леммы \ref*{sokr}}}} следует, что $(a-b)\divisible m$ тогда и только тогда, когда $(ak-bk)\divisible mk$, что и требовалось.
