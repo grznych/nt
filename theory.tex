@@ -690,5 +690,30 @@
 			[10]_{45},&[10+15]_{45}=[25]_{45},&[10+15\times2]_{45}=[40]_{45}.
 		\end{array}$$
 	\end{remark}
-	
+
+\newpage
+\section{Признаки делимости}
+
+	$$A=\overline{a_na_{n-1}\dots a_2a_1a_0}=\sum_{i=0}^na_i10^i$$
+
+\subsection{Признак делимости на $2$}
+
+	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod2$.
+	$$\sum_{i=0}^na_i10^i\equiv a_0\pmod2$$
+
+\subsection{Признак делимости на $3$}
+
+	Для любого $i\in\mathbb{N}_0$ имеет место $10^i\equiv1\pmod3$.
+	$$\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^na_i\pmod3$$
+
+\subsection{Признак делимости на $4$}
+
+	Для любого $i\geqslant2$ имеет место $10^i\equiv0\pmod4$, но $10\equiv2\pmod4$.
+	$$\sum_{i=0}^na_i10^i\equiv2a_1+a_0\pmod4$$
+
+\subsection{Признак делимости на $5$}
+
+	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod5$.
+	$$\sum_{i=0}^na_i10^i\equiv a_0\pmod5$$
+
 \end{document}
