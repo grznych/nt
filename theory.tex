@@ -696,14 +696,20 @@
 
 	Теория сравнений по модулю позволяет легко выводить признаки делимости для позиционной системы счисления с целочисленным основанием. Опишем универсальный алгоритм вывода признаков делимости (равноостаточности) для десятичной системы счисления.
 	
-	Чтобы определить делится ли число $A\in\mathbb{N}$ на другое число \mbox{$m\in\mathbb{N}$}, будем строить последовательность натуральных чисел $(A_i)_{i=0}^n$ такую, что
-	%, где $A_0=A$, с помощью некоторой функции $f\colon\mathbb{N}\to\mathbb{N}$ такой, что
+	Чтобы определить делится ли число $A\in\mathbb{N}$ на другое число \mbox{$m\in\mathbb{N}$}, будем строить последовательность натуральных чисел $(A_i)_{i=0}^n$, где $A_0=A$ и $0\leqslant A_n<m$, с помощью функции $f\colon\mathbb{N}\setminus\mathbb{N}_{m-1}\to\mathbb{N}$ такой, что:
 	\begin{enumerate}
-		\item $A_0=A$,
-		\item существует некоторая функция $f$ такая, что $f(A_i)=A_{i+1}$,
-		\item $A_i>A_{i+1}$ для любого $i\in\mathbb{N}_{n-1}$,
-		\item $0\leqslant A_n<m$,
-		\item $A\divisible m$ тогда и только тогда, когда $A_i\divisible m$ для любого $i\in\mathbb{N}_n$.
+		\item $f(A_i)=A_{i+1}$;
+		\item $f(A_{i-1})<A_{i-1}$ заменить на для любого $i\in\mathbb{N}_n$;
+		\item $x\divisible m$ тогда и только тогда, когда $f(x)\divisible m$.
+	\end{enumerate}
+
+	Можно описать более универсальный алгоритм для признака равноостаточности, который позволяет не только определить делится ли число $A\in\mathbb{Z}$ на другое число $m\in\mathbb{Z}$, но и найти остаток деления. Для этого будем строить последовательность целых чисел $(A_i)_{i=0}^n$ такую, что:
+	\begin{enumerate}
+		\item $A_0=A$;
+		\item существует функция $f$ такая, что $f(A_i)=A_{i+1}$;
+		\item $|A_{i-1}|>|A_i|$ для любого $i\in\mathbb{N}_{n-1}$;
+		\item $0\leqslant A_n<m$;
+		\item $A\equiv A_1\equiv\dots\equiv A_n\pmod m$.
 	\end{enumerate}
 
 	\begin{desig}
@@ -714,8 +720,9 @@
 
 	Опишем функцию, задающую признак делимости на $2$.
 	$$f(A)=\begin{cases}
-		a_0,&A\geqslant10,\\
-		A-2,&2\leqslant A<10
+		a_0,&|A|\geqslant10,\\
+		A-2,&2\leqslant A<10,\\
+		A+2,&-10<A\leqslant-1.
 	\end{cases}$$
 
 	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod2$.
@@ -723,15 +730,36 @@
 
 \subsection{Признак делимости на $3$}
 
+	Опишем функцию, задающую признак делимости на $3$.
+	$$f(A)=\begin{cases}
+		\sgn(A)\sum_{i=0}^na_i,&|A|\geqslant10,\\
+		A-3,&3\leqslant A<10,\\
+		A+3,&-10<A\leqslant-1.
+	\end{cases}$$
+
 	Для любого $i\in\mathbb{N}_0$ имеет место $10^i\equiv1\pmod3$.
 	$$\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^na_i\pmod3$$
 
 \subsection{Признак делимости на $4$}
 
+	Опишем функцию, задающую признак делимости на $4$.
+	$$f(A)=\begin{cases}
+		\sgn(A)(2a_1+a_0),&|A|\geqslant10,\\
+		A-4,&4\leqslant A<10,\\
+		A+4,&-10<A\leqslant-1.
+	\end{cases}$$
+
 	Для любого $i\geqslant2$ имеет место $10^i\equiv0\pmod4$, но $10\equiv2\pmod4$.
 	$$\sum_{i=0}^na_i10^i\equiv2a_1+a_0\pmod4$$
 
 \subsection{Признак делимости на $5$}
+
+	Опишем функцию, задающую признак делимости на $5$.
+	$$f(A)=\begin{cases}
+		\sgn(A)a_0,&|A|\geqslant10,\\
+		A-5,&5\leqslant A<10,\\
+		A+5,&-10<A\leqslant-1.
+	\end{cases}$$
 
 	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod5$.
 	$$\sum_{i=0}^na_i10^i\equiv a_0\pmod5$$
