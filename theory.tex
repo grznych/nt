@@ -704,134 +704,151 @@
 \newpage
 \section{Признаки делимости}
 
-	Теория сравнений по модулю позволяет легко выводить признаки делимости для позиционной системы счисления с целочисленным основанием. Опишем универсальный алгоритм вывода признаков делимости (равноостаточности) для десятичной системы счисления.
+	Теория сравнений по модулю позволяет легко выводить признаки делимости для позиционной системы счисления с целочисленным основанием. Покажем вывод некоторых признаков делимости для десятичной системы счисления.
 
 	\begin{desig}
-		Здесь и далее в этом разделе $A$ --- натуральное (целое) число, к которому применяется признак делимости (равноостаточности), $m$ --- число, по которому проверяется делимость (ищется остаток).
-	\end{desig}
-
-	\begin{desig}
-		$a_i$ --- цифры числа $A$, то есть
-		$$|A|=\overline{a_na_{n-1}\dots a_2a_1a_0}=\sum_{i=0}^na_i10^i.$$
+		Пусть $A\in\mathbb{N}$, тогда $a_i$ --- цифры числа $A$, то есть
+		$$A=\overline{a_na_{n-1}\dots a_2a_1a_0}=\sum_{i=0}^na_i10^i.$$
 	\end{desig}
 
 	\begin{definition}
-		\emph{Признаком делимости} называется алгоритм, позволяющий определить делится ли некоторое число $A\in\mathbb{N}$ на другое число $m\in\mathbb{N}$ с помощью некоторой функции $f_d\colon[m\,..+\infty)\to\mathbb{N}_0$ через построение последовательности чисел $(A_i)_{i=0}^n$. При этом должны выполняться следующие условия:
+		\emph{Признаком делимости} называется алгоритм, позволяющий определить делится ли некоторое число $A\in\mathbb{N}$ на другое число $m\in\mathbb{N}$ с помощью некоторой функции $f\colon[m\,..+\infty)\to\mathbb{N}_0$ через построение последовательности чисел $(A_i)_{i=0}^n$. При этом должны выполняться следующие условия:
 		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
 			\item $A_0=A$;
-			\item $A_{i+1}=f_d(A_i)$;
+			\item $A_{i+1}=f(A_i)$;
 			\item $A_n\in[0\,..\,m)$;
-			\item $f_d(x)<x$;
-			\item $x\divisible m$ тогда и только тогда, когда $f_d(x)\divisible m$.
+			\item $f(x)<x$;
+			\item $x\divisible m\Leftrightarrow f(x)\divisible m$.
 		\end{enumerate}
 		Если $A_n\divisible m$, то есть $A_n=0$, то $A\divisible m$.
 	\end{definition}
 
-	\begin{definition}
-		\emph{Признаком равноостаточности} называется алгоритм, позволяющий определить остаток от деления числа $A\in\mathbb{Z}$ на другое число $m\in\mathbb{N}$ с помощью функции $f_r\colon\mathbb{Z}\setminus[0\,..\,m)\to\mathbb{Z}$ через построение последовательности чисел $(A_i)_{i=0}^n$. При этом должны выполняться следующие условия:
-		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
-			\item $A_0=A$;
-			\item $A_{i+1}=f_r(A_i)$;
-			\item $A_n\in[0\,..\,m)$;
-			\item $|A_i|<|A_{i-1}|$ для любого $i\in[1\,..\,n)$;
-			\item $x\equiv f_r(x)\pmod m$.
-		\end{enumerate}
-		Остаток от деления числа $A$ на $m$ будет равен $A_n$.
-	\end{definition}
-
-	\begin{remark}
-		Четвёртый пункт в определении признака делимости можно заменить на немного другое требование: $A_i<A_{i-1}$ для любого $i\in[1\,..\,n]$, то есть здесь требуется строгое убывание последовательности, а в признаке равноостаточности последний член последовательности может быть больше или равен предпоследнего.
-	\end{remark}
-
 \subsection{Признак делимости на $2$}
 
-	Для начала заметим, что $10\equiv0\pmod2$.
-	
-	Пусть $|A|=10a+a_0$, тогда
-	$$A=\sgn(A)(10a+a_0)\equiv\sgn(A)a_0\equiv a_0\pmod2.$$
-	
-	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $2$:
-	$$f_d(A)=\begin{cases}
+	Пусть $A=10a+a_0$, тогда
+	$$A=10a+a_0\equiv a_0\pmod2.$$
+
+	Найдём такое $A_{min}$, что $a_0<A$ для любого $A\geqslant A_{min}$. 
+	$$a_0<10a+a_0\Rightarrow10a>0\Rightarrow a>0\Rightarrow a\geqslant1\Rightarrow A\geqslant10.$$
+	Значит, $A_{min}=10$.
+
+	Опишем функцию, задающую признак делимости на $2$:
+	$$f(A)=\begin{cases}
 		a_0,&A\geqslant10,\\
 		A-2,&2\leqslant A<10.
-	\end{cases}$$
-
-	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $2$:
-	$$f_r(A)=\begin{cases}
-		a_0,&|A|\geqslant10,\\
-		A-2,&2\leqslant A<10,\\
-		A+2,&-10<A\leqslant-1.
 	\end{cases}$$
 
 \subsection{Признак делимости на $3$}
 
 	Для начала заметим, что $10^i\equiv1^i=1\pmod3$ для любого $i\in\mathbb{N}_0$. Тогда
-	$$A=\sgn(A)\sum_{i=0}^na_i10^i\equiv\sgn(A)\sum_{i=0}^na_i\pmod3.$$
+	$$A=\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^na_i\pmod3.$$
 
-	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $3$:
-	$$f_d(A)=\begin{cases}
+	Найдём такое $A_{min}$, что $\sum_{i=0}^na_i<A$ для любого $A\geqslant A_{min}$. 
+	$$\sum_{i=0}^na_i<\sum_{i=0}^na_i10^i\Rightarrow\sum_{i=1}^na_i(10^i-1)>0\Rightarrow a_1\geqslant1\Rightarrow A\geqslant10.$$
+	Значит, $A_{min}=10$.
+
+	Опишем функцию, задающую признак делимости на $3$:
+	$$f(A)=\begin{cases}
 		\sum_{i=0}^na_i,&A\geqslant10,\\
 		A-3,&3\leqslant A<10.
 	\end{cases}$$
 
-	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $3$:
-	$$f_r(A)=\begin{cases}
-		\sgn(A)\sum_{i=0}^na_i,&|A|\geqslant10,\\
-		A-3,&3\leqslant A<10,\\
-		A+3,&-10<A\leqslant-1.
-	\end{cases}$$
-
 \subsection{Признак делимости на $4$}
 
-	Для начала заметим, что $100\equiv0\pmod4$.
-	
-	Пусть $|A|=100a+10a_1+a_0$, тогда
-	$$A=\sgn(A)(100a+10a_1+a_0)\equiv\sgn(A)(2a_1+a_0)\pmod4.$$
+	Пусть $A=100a+10a_1+a_0$, тогда
+	$$A=100a+10a_1+a_0\equiv2a_1+a_0\pmod4.$$
 
-	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $4$:
-	$$f_d(A)=\begin{cases}
+	Найдём такое $A_{min}$, что $2a_1+a_0<A$ для любого $A\geqslant A_{min}$. 
+	$$2a_1+a_0<100a+10a_1+a_0\Rightarrow100a+8a_1>0\Rightarrow a_1\geqslant1\Rightarrow A\geqslant10.$$
+	Значит, $A_{min}=10$.
+
+	Опишем функцию, задающую признак делимости на $4$:
+	$$f(A)=\begin{cases}
 		2a_1+a_0,&A\geqslant10,\\
 		A-4,&4\leqslant A<10.
 	\end{cases}$$
 
-	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $4$:
-	$$f_r(A)=\begin{cases}
-		\sgn(A)(2a_1+a_0),&|A|\geqslant10,\\
-		A-4,&4\leqslant A<10,\\
-		A+4,&-10<A\leqslant-1.
-	\end{cases}$$
-
 \subsection{Признак делимости на $5$}
 
-	Для начала заметим, что $10\equiv0\pmod5$.
-	
-	Пусть $|A|=10a+a_0$, тогда
-	$$A=\sgn(A)(10a+a_0)\equiv\sgn(A)a_0\pmod5.$$
-	
-	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $5$:
-	$$f_d(A)=\begin{cases}
+	Пусть $A=10a+a_0$, тогда
+	$$A=10a+a_0\equiv a_0\pmod5.$$
+
+	Найдём такое $A_{min}$, что $a_0<A$ для любого $A\geqslant A_{min}$. 
+	$$a_0<10a+a_0\Rightarrow10a>0\Rightarrow a>0\Rightarrow a\geqslant1\Rightarrow A\geqslant10.$$
+	Значит, $A_{min}=10$.
+
+	Опишем функцию, задающую признак делимости на $5$:
+	$$f(A)=\begin{cases}
 		a_0,&A\geqslant10,\\
 		A-5,&5\leqslant A<10.
-	\end{cases}$$
-	
-	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $5$:
-	$$f_r(A)=\begin{cases}
-		\sgn(A)a_0,&|A|\geqslant10,\\
-		A-5,&5\leqslant A<10,\\
-		A+5,&-10<A\leqslant-1.
 	\end{cases}$$
 
 \subsection{Признак делимости на $7$}
 
-	Пусть $\mathbb{N}\ni A=10a+a_0$. Для начала заметим, что
+	Пусть $A=10a+a_0$. Для начала заметим, что
 	$$A=10a+a_0\equiv3a-6a_0=3(a-2a_0)\pmod7.$$
 	Так как $(3,7)=1$, получаем:
 	$$\boxed{3(a-2a_0)\equiv0\pmod7\Leftrightarrow a-2a_0\equiv0\pmod7}.$$
 
-	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $7$:
-	$$f_d(A)=\begin{cases}
+%	Найдём такое $A_{min}$, что $a-2a_0<A$ для любого $A\geqslant A_{min}$. 
+%	$$a-2a_0<10a+a_0\Rightarrow9a+3a_0>0\Rightarrow a>0\Rightarrow a\geqslant1\Rightarrow A\geqslant10.$$
+%	Значит, $A_{min}=10$.
+
+	Опишем функцию, задающую признак делимости на $7$:
+	$$f(A)=\begin{cases}
 		|a-2a_0|,&A\geqslant10,\\
 		A-7,&7\leqslant A<10.
+	\end{cases}$$
+
+\subsection{Признак делимости на $8$}
+
+	Пусть $A=1000a+100a_2+10a_1+a_0$, тогда
+	$$A=1000a+100a_2+10a_1+a_0\equiv4a_2+2a_1+a_0\pmod8.$$
+
+	Опишем функцию, задающую признак делимости на $8$:
+	$$f(A)=\begin{cases}
+		4a_2+2a_1+a_0,&A\geqslant10,\\
+		A-8,&8\leqslant A<10.
+	\end{cases}$$
+
+\subsection{Признак делимости на $9$}
+	
+	Для начала заметим, что $10^i\equiv1^i=1\pmod9$ для любого $i\in\mathbb{N}_0$. Тогда
+	$$A=\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^na_i\pmod9.$$
+	
+	Опишем функцию, задающую признак делимости на $9$:
+	$$f(A)=\begin{cases}
+		\sum_{i=0}^na_i,&A\geqslant10,\\
+		0,&A=9.
+	\end{cases}$$
+
+\subsection{Признак делимости на $10$}
+	
+	Пусть $A=10a+a_0$, тогда
+	$$A=10a+a_0\equiv a_0\pmod{10}.$$
+	
+	Опишем функцию, задающую признак делимости на $10$:
+	$$f(A)=a_0.$$
+
+\subsection{Признак делимости на $11$}
+	
+	Для начала заметим, что $10^i\equiv(-1)^i\pmod11$ для любого $i\in\mathbb{N}_0$. Тогда
+	$$A=\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^n(-1)^ia_i\pmod{11}.$$
+	
+	Опишем функцию, задающую признак делимости на $11$:
+	$$f(A)=\left|\sum_{i=0}^n(-1)^ia_i\right|.$$
+
+\subsection{Признак делимости на $13$}
+	
+	Пусть $A=10a+a_0$. Для начала заметим, что
+	$$A=10a+a_0\equiv-3a-12a_0=-3(a+4a_0)\pmod{13}.$$
+	Так как $(-3,13)=1$, получаем:
+	$$\boxed{-3(a+4a_0)\equiv0\pmod{13}\Leftrightarrow a+4a_0\equiv0\pmod{13}}.$$
+	
+	Опишем функцию, задающую признак делимости на $13$:
+	$$f(A)=\begin{cases}
+		a+4a_0,&A\geqslant40,\\
+		A-13,&13\leqslant A<40.
 	\end{cases}$$
 
 \newpage
