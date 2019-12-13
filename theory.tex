@@ -35,6 +35,26 @@
 	
 	Основные свойства целых чисел и операций (сложение, вычитание, умножение, деление) над ними будем считать уже известными. Таким образом, если $a,b\in\mathbb{Z}$, то $a+b\in\mathbb{Z}$, $a-b\in\mathbb{Z}$, $ab\in\mathbb{Z}$, однако $\frac{a}{b}$ может быть как целым, так и не целым.
 
+	\begin{desig}
+		$\mathbb{N}_0=\mathbb{N}\cup\{\,0\,\}$.
+	\end{desig}
+	
+	\begin{desig}
+		$[a\,..\,b]=\mathbb{Z}\cap[a,b]$.
+	\end{desig}
+	
+	\begin{desig}
+		$[a\,..\,b)=\mathbb{Z}\cap[a,b)$.
+	\end{desig}
+	
+	\begin{desig}
+		$(a\,..\,b]=\mathbb{Z}\cap(a,b]$.
+	\end{desig}
+	
+	\begin{desig}
+		$(a\,..\,b)=\mathbb{Z}\cap(a,b)$.
+	\end{desig}
+
 	\begin{remark}
 		Напомним, что $$|x|=
 		\begin{cases}
@@ -50,7 +70,7 @@
 
 		Проверьте, что $x=\sgn(x)|x|$ и $|x|=\sgn(x)x$.
 		
-		Докажите, что $|a|<x$ тогда и только тогда, когда $-x<a<x$.
+		Докажите, что $|a|<x\Leftrightarrow-x<a<x$.
 	\end{remark}
 
 \subsection{Деление с остатком}
@@ -65,7 +85,7 @@
 	\end{desig}
 	
 	\begin{example}
-		Любое целое число $a$ является делителем $0$, так как \mbox{$0=0\times a$}. Из этого же следует, что на ноль делится только ноль.
+		Любое целое число $a$ является делителем $0$, так как \mbox{$0=0\cdot a$}. Из этого же следует, что на ноль делится только ноль.
 	\end{example}
 
 	\begin{lemma}
@@ -155,17 +175,13 @@
 
 \subsection{Наибольший общий делитель}
 \label{nod}
-	
-	\begin{desig}
-		Здесь и далее $\mathbb{N}_n=\{\,1,\dots,n\,\}$.
-	\end{desig}
-	
+
 	\begin{definition}
-		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $d\in\mathbb{N}$ называется \emph{общим делителем} чисел \mbox{$a_1$, \dots, $a_n$}, если $a_i\divisible d$ для любого $i\in\mathbb{N}_n$. Наибольшее число из общих делителей этих чисел называется \emph{наибольшим общим делителем} и обозначается $(a_1,\dots,a_n)$.
+		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $d\in\mathbb{N}$ называется \emph{общим делителем} чисел \mbox{$a_1$, \dots, $a_n$}, если $a_i\divisible d$ для любого $i\in[1\,..\,n]$. Наибольшее число из общих делителей этих чисел называется \emph{наибольшим общим делителем} и обозначается $(a_1,\dots,a_n)$.
 	\end{definition}
 
 	\begin{desig}
-		Здесь и далее $$\mathcal{D}_{a_1,\dots,a_n}=\{\,d\in\mathbb{N}\:\mid\:\forall i\in\mathbb{N}_n\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\:\mid\:a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
+		Здесь и далее $$\mathcal{D}_{a_1,\dots,a_n}=\{\,d\in\mathbb{N}\:\mid\:\forall i\in[1\,..\,n]\quad a_i\divisible d\,\}\text{ ---}$$ множество, состоящее из всех общих делителей чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{D}_a=\{\,d\in\mathbb{N}\:\mid\:a\divisible d\,\}$ --- множество, состоящее из всех делителей числа $a$.
 	\end{desig}
 
 	\begin{definition}
@@ -249,28 +265,28 @@
 	\begin{example}
 		Найдём такие $u$ и $v$, что $(-78)u+(-66)v=(-78,-66)$. С помощью алгоритма Евклида получаем следующие равенства:
 		\begin{align*}
-				(-78)&=(-66)\times2+54,&0&<54<|-66|=66;\\
-				(-66)&=54\times(-2)+42,&0&<42<54;\\
+				(-78)&=(-66)\cdot2+54,&0&<54<|-66|=66;\\
+				(-66)&=54\cdot(-2)+42,&0&<42<54;\\
 				54&=42+12,&0&<12<42;\\
-				42&=12\times3+6,&0&<6<12;\\
-				12&=6\times2.
+				42&=12\cdot3+6,&0&<6<12;\\
+				12&=6\cdot2.
 		\end{align*}
 		Таким образом, $(-78,-66)=6$. Теперь выразим остатки из полученных равенств:
 		\begin{align*}
-			6&=42+12\times(-3);\\
-			12&=54+42\times(-1);\\
-			42&=(-66)+54\times2;\\
-			54&=(-78)+(-66)\times(-2).
+			6&=42+12\cdot(-3);\\
+			12&=54+42\cdot(-1);\\
+			42&=(-66)+54\cdot2;\\
+			54&=(-78)+(-66)\cdot(-2).
 		\end{align*}
 		Начнём последовательно в первом равенстве заменять остатки:
 		\begin{align*}
-			6=42&+\boxed{12}\times(-3)=\\
-			=42&+\underline{(54+42\times(-1))}\times(-3)=\\
-			=54\times(-3)&+\boxed{42}\times4=\\
-			=54\times(-3)&+\underline{((-66)+54\times2)}\times4=\\
-			=(-66)\times4&+\boxed{54}\times5=\\
-			=(-66)\times4&+\underline{((-78)+(-66)\times(-2))}\times5=\\
-			=\boxed{(-78)}\times5&+\boxed{(-66)}\times(-6).
+			6=42&+\boxed{12}\cdot(-3)=\\
+			=42&+\underline{(54+42\cdot(-1))}\cdot(-3)=\\
+			=54\cdot(-3)&+\boxed{42}\cdot4=\\
+			=54\cdot(-3)&+\underline{((-66)+54\cdot2)}\cdot4=\\
+			=(-66)\cdot4&+\boxed{54}\cdot5=\\
+			=(-66)\cdot4&+\underline{((-78)+(-66)\cdot(-2))}\cdot5=\\
+			=\boxed{(-78)}\cdot5&+\boxed{(-66)}\cdot(-6).
 		\end{align*}
 		Значит, $u=5$ и $v=-6$.
 	\end{example}
@@ -324,21 +340,21 @@
 	\end{proof}
 
 	\begin{example}
-		$(5\times14)\divisible7$, значит, $14\divisible7$, так как $(5,7)=1$.
+		$(5\cdot14)\divisible7$, значит, $14\divisible7$, так как $(5,7)=1$.
 	\end{example}
 	\begin{example}
-		$(8\times9)\divisible 6$, но $9\not\divisible6$, так как $(8,6)\neq1$.
+		$(8\cdot9)\divisible 6$, но $9\not\divisible6$, так как $(8,6)=2\neq1$.
 	\end{example}
 
 \subsection{Наименьшее общее кратное}
 \label{nok}
 	
 	\begin{definition}
-		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $m\in\mathbb{N}$ называется \emph{общим кратным} чисел \mbox{$a_1$, \dots, $a_n$}, если $m\divisible a_i$ для любого $i\in\mathbb{N}_n$. Наименьшее число из общих кратных этих чисел называется \emph{наименьшим общим кратным} и обозначается $[a_1,\dots,a_n]$.
+		Пусть среди чисел $a_1$, \dots, $a_n$ есть хотя бы одно не равное нулю. Тогда $m\in\mathbb{N}$ называется \emph{общим кратным} чисел \mbox{$a_1$, \dots, $a_n$}, если $m\divisible a_i$ для любого $i\in[1\,..\,n]$. Наименьшее число из общих кратных этих чисел называется \emph{наименьшим общим кратным} и обозначается $[a_1,\dots,a_n]$.
 	\end{definition}
 	
 	\begin{desig}
-		Здесь и далее $$\mathcal{M}_{a_1,\dots,a_n}=\{\,m\in\mathbb{N}\:\mid\:\forall i\in\mathbb{N}_n\quad m\divisible a_i\,\}\text{ ---}$$ множество, состоящее из всех общих кратных чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{M}_a=\{\,m\in\mathbb{N}\:\mid\:m\divisible a\,\}$ --- множество, состоящее из всех кратных числа $a$.
+		Здесь и далее $$\mathcal{M}_{a_1,\dots,a_n}=\{\,m\in\mathbb{N}\:\mid\:\forall i\in[1\,..\,n]\quad m\divisible a_i\,\}\text{ ---}$$ множество, состоящее из всех общих кратных чисел $a_1$, \dots, $a_n$. Тогда $\mathcal{M}_a=\{\,m\in\mathbb{N}\:\mid\:m\divisible a\,\}$ --- множество, состоящее из всех кратных числа $a$.
 	\end{desig}
 
 	\begin{statement}
@@ -453,15 +469,15 @@
 	\end{proof}
 
 	\begin{example}
-		Вычислим остаток $13^{16}-2^{55}\times5^{15}$ от деления на $3$.
-		$$13^{16}-2^{55}\times5^{15}\equiv1^{16}-(-1)^{55}\times(-1)^{15}=1-1=0\pmod{3}.$$
+		Вычислим остаток $13^{16}-2^{55}\cdot5^{15}$ от деления на $3$.
+		$$13^{16}-2^{55}\cdot5^{15}\equiv1^{16}-(-1)^{55}\cdot(-1)^{15}=1-1=0\pmod{3}.$$
 	\end{example}
 
 	\begin{example}
-		Вычислим остаток $(116+17^{17})^{21}\times7^{49}$ от деления на $8$.
+		Вычислим остаток $(116+17^{17})^{21}\cdot7^{49}$ от деления на $8$.
 		\begin{align*}
-			(116+17^{17})^{21}\times7^{49}&\equiv(4+1^{17})^{21}\times(-1)^{49}=\\
-			=-5^{21}=-5\times25^{10}&\equiv3\times1^{10}=3\pmod{8}
+			(116+17^{17})^{21}\cdot7^{49}&\equiv(4+1^{17})^{21}\cdot(-1)^{49}=\\
+			=-5^{21}=-5\cdot25^{10}&\equiv3\cdot1^{10}=3\pmod{8}
 		\end{align*}
 	\end{example}
 
@@ -544,24 +560,24 @@
 		Так как каждому остатку по модулю $m$ соответствует свой класс вычетов и на остаток $r$ имеется ограничение $0\leqslant r<m$, количество классов вычетов по модулю $m$ равно количеству различных остатков, то есть $m$.
 	\end{remark}
 	
-	\begin{remark}
-		Обозначим через $\mathcal{P}_m=\{\,0,1,2,\dots,m-1\,\}$ --- множество остатков по модулю $m$, то есть множество, содержащее по одному элементу из каждого класса вычетов по модулю $m$.
-	\end{remark}
+	\begin{desig}
+		$\mathcal{R}_m=[0\,..\,m)$ --- множество остатков по модулю $m$, то есть множество, содержащее по одному элементу из каждого класса вычетов по модулю $m$.
+	\end{desig}
 	
 	\begin{statement}
 		Множества $[0]_m$, $[1]_m$, \dots, $[m-1]_m$ образуют \href{https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D0%B1%D0%B8%D0%B5%D0%BD%D0%B8%D0%B5_%D0%BC%D0%BD%D0%BE%D0%B6%D0%B5%D1%81%D1%82%D0%B2%D0%B0}{\textbf{\textit{разбиение множества}}} $\mathbb{Z}$, то есть
 		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
 			\item $[0]_m\cup[1]_m\cup\cdots\cup[m-1]_m=\mathbb{Z}$;
-			\item $[p]_m\cap[q]_m=\varnothing$ для любых $p,q\in\mathcal{P}_m$ таких, что $p\neq q$.
+			\item $[p]_m\cap[q]_m=\varnothing$ для любых $p,q\in\mathcal{R}_m$ таких, что $p\neq q$.
 		\end{enumerate}
 	\end{statement}
 	\begin{remark}
 		Утверждение состоит в том, что любое целое число лежит в одном из $m$ классов вычетов и что эти классы попарно не пересекаются.
 	\end{remark}
 	\begin{proof}
-		Докажем сперва первый пункт. Пусть $x\in\mathbb{Z}$, тогда по \hyperref[ost]{\textbf{\textit{теореме о делении с остатком}}} $x=mq+r$, где $0\leqslant r<m$, то есть $x\equiv r\pmod{m}$, а значит, $x\in[r]_m$, где $r\in\mathcal{P}_m$, что и требовалось.
+		Докажем сперва первый пункт. Пусть $x\in\mathbb{Z}$, тогда по \hyperref[ost]{\textbf{\textit{теореме о делении с остатком}}} $x=mq+r$, где $0\leqslant r<m$, то есть $x\equiv r\pmod{m}$, а значит, $x\in[r]_m$, где $r\in\mathcal{R}_m$, что и требовалось.
 		
-		Докажем теперь второй пункт. Пусть $x\in[p]_m\cap[q]_m$, тогда $$x\equiv p\pmod{m}\text{ и }x\equiv q\pmod{m},$$ поэтому $p\equiv q\pmod{m}$. Значит, $p=q$ (\textbf{\textit{докажите!}}), так как \mbox{$p,q\in\mathcal{P}_m$}.
+		Докажем теперь второй пункт. Пусть $x\in[p]_m\cap[q]_m$, тогда $$x\equiv p\pmod{m}\text{ и }x\equiv q\pmod{m},$$ поэтому $p\equiv q\pmod{m}$. Значит, $p=q$ (\textbf{\textit{докажите!}}), так как \mbox{$p,q\in\mathcal{R}_m$}.
 	\end{proof}
 
 	\begin{example}
@@ -590,7 +606,7 @@
 	\end{remark}
 	
 	\begin{definition}
-		Класс вычетов $[x_1]_m$ называется \emph{решением сравнения} (\ref{eq8}), если $ax_1\equiv b\pmod{m}$. При таком соглашении сравнение (\ref{eq8}) будет иметь столько решений, сколько элементов $\mathcal{P}_m$ ему удовлетворяет. 
+		Класс вычетов $[x_1]_m$ называется \emph{решением сравнения} (\ref{eq8}), если $ax_1\equiv b\pmod{m}$. При таком соглашении сравнение (\ref{eq8}) будет иметь столько решений, сколько элементов $\mathcal{R}_m$ ему удовлетворяет. 
 	\end{definition}
 
 	\begin{statement}
@@ -602,15 +618,15 @@
 	\end{remark}
 	\begin{proof}
 		Докажем сперва, что $[bu]_m$ является решением. Пусть $(b,m)=d$, $b=b_1d$ и $m=m_1d$. Значит, по \hyperref[sokrmod2]{\textbf{\textit{утверждению \ref*{sokrmod2}}}}
-		$$\boxed{abu\equiv b\pmod{m}\text{, если и только если }ab_1u\equiv b_1\pmod{m_1}}.$$
+		$$\boxed{abu\equiv b\pmod{m}\Leftrightarrow ab_1u\equiv b_1\pmod{m_1}}.$$
 		Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(b_1,m_1)=1$, поэтому с помощью \hyperref[sokrmod]{\textbf{\textit{утверждения \ref*{sokrmod}}}} получаем
-		$$\boxed{ab_1u\equiv b_1\pmod{m_1}\text{, если и только если }au\equiv1\pmod{m_1}}.$$
+		$$\boxed{ab_1u\equiv b_1\pmod{m_1}\Leftrightarrow au\equiv1\pmod{m_1}}.$$
 		Так как $au=1-mv=1-m_1dv$, получаем, что
-		$$\boxed{au\equiv1\pmod{m_1}\text{, если и только если }1-m_1dv\equiv1\pmod{m_1}},$$
+		$$\boxed{au\equiv1\pmod{m_1}\Leftrightarrow1-m_1dv\equiv1\pmod{m_1}},$$
 		а это выполняется тогда и только тогда, когда $\boxed{1\equiv1\pmod{m_1}}$.
 		
-		Таким образом, мы получили такое утверждение:
-		$$\boxed{abu\equiv b\pmod{m}\text{ тогда и только тогда, когда }1\equiv1\pmod{m_1}}.$$
+		Таким образом, мы получили следующее утверждение:
+		$$\boxed{abu\equiv b\pmod{m}\Leftrightarrow1\equiv1\pmod{m_1}}.$$
 		И, так как $1\equiv1\pmod{m_1}$ --- верное утверждение, верным будет и $abu\equiv b\pmod{m}$, что и требовалось.
 		
 		Теперь докажем единственность решения. Пусть $[x_1]_m, [x_2]_m$ --- два решения сравнения. Тогда из $ax_1\equiv b\pmod{m}$ и $ax_2\equiv b\pmod{m}$ следует $ax_1\equiv ax_2\pmod{m}$. Так как $(a,m)=1$, из \hyperref[sokrmod]{\textbf{\textit{утверждения~\ref*{sokrmod}}}} следует $x_1\equiv x_2\pmod{m}$, то есть $[x_1]_m=[x_2]_m$, что и требовалось.
@@ -619,18 +635,14 @@
 	\begin{example}
 		Решим сравнение $7x\equiv3\pmod{45}$, воспользовавшись предыдущим утверждением, так как $(7,45)=1$. Для этого найдём такие $u$ и $v$, что $7u+45v=1$. Сперва применим алгоритм Евклида:
 		\begin{align*}
-			45&=7\times6+3,&0&\leqslant3<7;\\
-			7&=3\times2+1,&0&\leqslant1<3;\\
-			3&=3\times1.
+			45&=7\cdot6+3,&0&\leqslant3<7;\\
+			7&=3\cdot2+1,&0&\leqslant1<3;\\
+			3&=3\cdot1.
 		\end{align*}
 		Теперь проделаем процедуру замены остатков:
-		$$\boxed{1=}7-3\times2=7-(45-7\times6)\times2=\boxed{7\times13+45\times(-2)}.$$
-		Значит, $u=13$, а решением будет $[13\times3]_{45}=[39]_{45}$.
+		$$\boxed{1=}7-3\cdot2=7-(45-7\cdot6)\cdot2=\boxed{7\cdot13+45\cdot(-2)}.$$
+		Значит, $u=13$, а решением будет $[13\cdot3]_{45}=[39]_{45}$.
 	\end{example}
-
-	\begin{remark}
-		Здесь и далее $$\mathcal{R}_{a,b,m}=\{\,x\in\mathbb{Z}\mid ax\equiv b\pmod{m}\,\}\text{ ---}$$ множество чисел, удовлетворяющих сравнению $ax\equiv b\pmod{m}$.
-	\end{remark}
 
 	\begin{definition}
 		Сравнения $a_1x\equiv b_1\pmod{m_1}$ и $a_2x\equiv b_2\pmod{m_2}$ называются \emph{равносильными}, если $\mathcal{R}_{a_1,b_1,m_1}=\mathcal{R}_{a_2,b_2,m_2}$.
@@ -647,15 +659,13 @@
 		Первый пункт напрямую следует из \hyperref[nodsr]{\textbf{\textit{утверждения \ref*{nodsr}}}}.
 		
 		Займёмся вторым пунктом. Пусть $a=a_1d$, $b=b_1d$ и $m=m_1d$. Из \hyperref[sokrmod2]{\textbf{\textit{утверждения \ref*{sokrmod2}}}} следует
-		$$\boxed{ax\equiv b\pmod{m}\text{, если и только если }a_1x\equiv b_1\pmod{m_1}}.$$
-		Значит (\textbf{\textit{проверьте!}}), $\mathcal{R}_{a,b,m}=\mathcal{R}_{a_1,b_1,m_1}$. Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(a_1,m_1)=1$, а значит, сравнение $a_1x\equiv b_1\pmod{m_1}$ имеет единственное решение $[x_1]_{m_1}$. Без ограничения общности будем считать, что $x_1\in\mathcal{P}_{m_1}$, то есть $0\leqslant x_1<m_1$. Исходное сравнение имеет столько решений, сколько элементов
-		$$[x_1]_{m_1}=\{\,x\in\mathbb{Z}\mid x=x_1+m_1t\text{, где }t\in\mathbb{Z}\,\}.$$
-		содержится в множестве $\mathcal{P}_m$.
+		$$\boxed{ax\equiv b\pmod{m}\Leftrightarrow a_1x\equiv b_1\pmod{m_1}}.$$
+		Значит, множества решений этих сравнений совпадают. Из \hyperref[delpr]{\textbf{\textit{утверждения \ref*{delpr}}}} следует $(a_1,m_1)=1$, а значит, сравнение $a_1x\equiv b_1\pmod{m_1}$ имеет единственное решение $[x_1]_{m_1}$. Без ограничения общности будем считать, что $x_1\in\mathcal{R}_{m_1}$, то есть $0\leqslant x_1<m_1$. Исходное сравнение имеет столько решений, сколько элементов содержится в множестве $[x_1]_{m_1}\cap\mathcal{R}_m$.
 		
-		Чтобы $x=x_1+m_1t$ принадлежал множеству $\mathcal{P}_m$, необходимо $$0\leqslant x_1+m_1t<m.$$ Если $t\leqslant-1$, то $$x_1+m_1t\leqslant x_1-m_1<0,$$ что не подходит. Если $d\leqslant t$, то $$m\leqslant x_1+m=x_1+m_1d\leqslant x_1+m_1t,$$ что также не подходит. Если $0\leqslant t\leqslant d-1$, то
+		Чтобы $x=x_1+m_1t$ принадлежал множеству $\mathcal{R}_m$, необходимо $$0\leqslant x_1+m_1t<m.$$ Если $t\leqslant-1$, то $$x_1+m_1t\leqslant x_1-m_1<0,$$ что не подходит. Если $d\leqslant t$, то $$m\leqslant x_1+m=x_1+m_1d\leqslant x_1+m_1t,$$ что также не подходит. Если $0\leqslant t\leqslant d-1$, то
 		$$\boxed{0\leqslant}x_1\leqslant\boxed{x_1+m_1t}\leqslant x_1+m_1(d-1)\boxed{<}m_1+m_1(d-1)=m_1d=\boxed{m}.$$
 		
-		Таким образом, на $t$ возникает ограничение $0\leqslant t\leqslant d-1$. Каждому значению $t$ из этого промежутка соответствует свой элемент $\mathcal{P}_m$, равный $x_1+m_1t$. И, так как каждому элементу $\mathcal{P}_m$ отвечает своё решение, получаем $d$ решений исходного сравнения:
+		Таким образом, на $t$ возникает ограничение $0\leqslant t\leqslant d-1$. Каждому значению $t$ из этого промежутка соответствует свой элемент $\mathcal{R}_m$, равный $x_1+m_1t$. И, так как каждому элементу $\mathcal{R}_m$ отвечает своё решение, получаем $d$ решений исходного сравнения:
 		$$\begin{array}{ccccc}
 			[x_1]_m,&[x_1+m_1]_m,&[x_1+2m_1]_m,&\dots,&[x_1+(d-1)m_1]_m.
 		\end{array}$$
@@ -671,14 +681,14 @@
 	\begin{example}
 		Решим сравнение $6x\equiv15\pmod{45}$. Это сравнение имеет $3$ решения, так как $d=(6,45)=3$ и $15\divisible3$. Найдём такие, числа $u$ и $v$, что $6u+45v=3$.
 		\begin{align*}
-			45&=6\times7+3,&0&\leqslant3<6;\\
-			6&=3\times2.
+			45&=6\cdot7+3,&0&\leqslant3<6;\\
+			6&=3\cdot2.
 		\end{align*}
-		Значит, $3=6\times(-7)+45$, то есть $u=-7$. Получим следующие решения:
+		Значит, $3=6\cdot(-7)+45$, то есть $u=-7$. Получим следующие решения:
 		\begin{align*}
-			[10]_{45}&=\left[\frac{15\times(-7)}{3}\right]_{45},\\
-			[25]_{45}&=\left[\frac{15\times(-7)+45}{3}\right]_{45},\\
-			[40]_{45}&=\left[\frac{15\times(-7)+2\times45}{3}\right]_{45}.
+			[10]_{45}&=\left[\frac{15\cdot(-7)}{3}\right]_{45},\\
+			[25]_{45}&=\left[\frac{15\cdot(-7)+45}{3}\right]_{45},\\
+			[40]_{45}&=\left[\frac{15\cdot(-7)+2\cdot45}{3}\right]_{45}.
 		\end{align*}
 	\end{example}
 	
@@ -687,7 +697,7 @@
 		$$2x\equiv5\pmod{15}.$$
 		Найдя его решение, равное $[10]_{15}$, все решения исходного сравнения получаем, прибавляя с каждым разом $15$, то есть
 		$$\begin{array}{ccc}
-			[10]_{45},&[10+15]_{45}=[25]_{45},&[10+15\times2]_{45}=[40]_{45}.
+			[10]_{45},&[10+15]_{45}=[25]_{45},&[10+15\cdot2]_{45}=[40]_{45}.
 		\end{array}$$
 	\end{remark}
 
@@ -695,73 +705,136 @@
 \section{Признаки делимости}
 
 	Теория сравнений по модулю позволяет легко выводить признаки делимости для позиционной системы счисления с целочисленным основанием. Опишем универсальный алгоритм вывода признаков делимости (равноостаточности) для десятичной системы счисления.
-	
-	Чтобы определить делится ли число $A\in\mathbb{N}$ на другое число \mbox{$m\in\mathbb{N}$}, будем строить последовательность натуральных чисел $(A_i)_{i=0}^n$, где $A_0=A$ и $0\leqslant A_n<m$, с помощью функции $f\colon\mathbb{N}\setminus\mathbb{N}_{m-1}\to\mathbb{N}$ такой, что:
-	\begin{enumerate}
-		\item $f(A_i)=A_{i+1}$;
-		\item $f(A_{i-1})<A_{i-1}$ заменить на для любого $i\in\mathbb{N}_n$;
-		\item $x\divisible m$ тогда и только тогда, когда $f(x)\divisible m$.
-	\end{enumerate}
-
-	Можно описать более универсальный алгоритм для признака равноостаточности, который позволяет не только определить делится ли число $A\in\mathbb{Z}$ на другое число $m\in\mathbb{Z}$, но и найти остаток деления. Для этого будем строить последовательность целых чисел $(A_i)_{i=0}^n$ такую, что:
-	\begin{enumerate}
-		\item $A_0=A$;
-		\item существует функция $f$ такая, что $f(A_i)=A_{i+1}$;
-		\item $|A_{i-1}|>|A_i|$ для любого $i\in\mathbb{N}_{n-1}$;
-		\item $0\leqslant A_n<m$;
-		\item $A\equiv A_1\equiv\dots\equiv A_n\pmod m$.
-	\end{enumerate}
 
 	\begin{desig}
-		Пусть $A=\sum_{i=0}^na_i10^i$. Тогда $\overline{a_na_{n-1}\dots a_2a_1a_0}$ --- цифровая запись числа $A$.
+		Здесь и далее в этом разделе $A$ --- натуральное (целое) число, к которому применяется признак делимости (равноостаточности), $m$ --- число, по которому проверяется делимость (ищется остаток).
 	\end{desig}
+
+	\begin{desig}
+		$a_i$ --- цифры числа $A$, то есть
+		$$|A|=\overline{a_na_{n-1}\dots a_2a_1a_0}=\sum_{i=0}^na_i10^i.$$
+	\end{desig}
+
+	\begin{definition}
+		\emph{Признаком делимости} называется алгоритм, позволяющий определить делится ли некоторое число $A\in\mathbb{N}$ на другое число $m\in\mathbb{N}$ с помощью некоторой функции $f_d\colon[m\,..+\infty)\to\mathbb{N}_0$ через построение последовательности чисел $(A_i)_{i=0}^n$. При этом должны выполняться следующие условия:
+		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+			\item $A_0=A$;
+			\item $A_{i+1}=f_d(A_i)$;
+			\item $A_n\in[0\,..\,m)$;
+			\item $f_d(x)<x$;
+			\item $x\divisible m$ тогда и только тогда, когда $f_d(x)\divisible m$.
+		\end{enumerate}
+		Если $A_n\divisible m$, то есть $A_n=0$, то $A\divisible m$.
+	\end{definition}
+
+	\begin{definition}
+		\emph{Признаком равноостаточности} называется алгоритм, позволяющий определить остаток от деления числа $A\in\mathbb{Z}$ на другое число $m\in\mathbb{N}$ с помощью функции $f_r\colon\mathbb{Z}\setminus[0\,..\,m)\to\mathbb{Z}$ через построение последовательности чисел $(A_i)_{i=0}^n$. При этом должны выполняться следующие условия:
+		\begin{enumerate}[topsep=0pt,itemsep=-1ex,partopsep=1ex,parsep=1ex]
+			\item $A_0=A$;
+			\item $A_{i+1}=f_r(A_i)$;
+			\item $A_n\in[0\,..\,m)$;
+			\item $|A_i|<|A_{i-1}|$ для любого $i\in[1\,..\,n)$;
+			\item $x\equiv f_r(x)\pmod m$.
+		\end{enumerate}
+		Остаток от деления числа $A$ на $m$ будет равен $A_n$.
+	\end{definition}
+
+	\begin{remark}
+		Четвёртый пункт в определении признака делимости можно заменить на немного другое требование: $A_i<A_{i-1}$ для любого $i\in[1\,..\,n]$, то есть здесь требуется строгое убывание последовательности, а в признаке равноостаточности последний член последовательности может быть больше или равен предпоследнего.
+	\end{remark}
 
 \subsection{Признак делимости на $2$}
 
-	Опишем функцию, задающую признак делимости на $2$.
-	$$f(A)=\begin{cases}
+	Для начала заметим, что $10\equiv0\pmod2$.
+	
+	Пусть $|A|=10a+a_0$, тогда
+	$$A=\sgn(A)(10a+a_0)\equiv\sgn(A)a_0\equiv a_0\pmod2.$$
+	
+	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $2$:
+	$$f_d(A)=\begin{cases}
+		a_0,&A\geqslant10,\\
+		A-2,&2\leqslant A<10.
+	\end{cases}$$
+
+	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $2$:
+	$$f_r(A)=\begin{cases}
 		a_0,&|A|\geqslant10,\\
 		A-2,&2\leqslant A<10,\\
 		A+2,&-10<A\leqslant-1.
 	\end{cases}$$
 
-	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod2$.
-	$$\sum_{i=0}^na_i10^i\equiv a_0\pmod2$$
-
 \subsection{Признак делимости на $3$}
 
-	Опишем функцию, задающую признак делимости на $3$.
-	$$f(A)=\begin{cases}
+	Для начала заметим, что $10^i\equiv1^i=1\pmod3$ для любого $i\in\mathbb{N}_0$. Тогда
+	$$A=\sgn(A)\sum_{i=0}^na_i10^i\equiv\sgn(A)\sum_{i=0}^na_i\pmod3.$$
+
+	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $3$:
+	$$f_d(A)=\begin{cases}
+		\sum_{i=0}^na_i,&A\geqslant10,\\
+		A-3,&3\leqslant A<10.
+	\end{cases}$$
+
+	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $3$:
+	$$f_r(A)=\begin{cases}
 		\sgn(A)\sum_{i=0}^na_i,&|A|\geqslant10,\\
 		A-3,&3\leqslant A<10,\\
 		A+3,&-10<A\leqslant-1.
 	\end{cases}$$
 
-	Для любого $i\in\mathbb{N}_0$ имеет место $10^i\equiv1\pmod3$.
-	$$\sum_{i=0}^na_i10^i\equiv\sum_{i=0}^na_i\pmod3$$
-
 \subsection{Признак делимости на $4$}
 
-	Опишем функцию, задающую признак делимости на $4$.
-	$$f(A)=\begin{cases}
+	Для начала заметим, что $100\equiv0\pmod4$.
+	
+	Пусть $|A|=100a+10a_1+a_0$, тогда
+	$$A=\sgn(A)(100a+10a_1+a_0)\equiv\sgn(A)(2a_1+a_0)\pmod4.$$
+
+	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $4$:
+	$$f_d(A)=\begin{cases}
+		2a_1+a_0,&A\geqslant10,\\
+		A-4,&4\leqslant A<10.
+	\end{cases}$$
+
+	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $4$:
+	$$f_r(A)=\begin{cases}
 		\sgn(A)(2a_1+a_0),&|A|\geqslant10,\\
 		A-4,&4\leqslant A<10,\\
 		A+4,&-10<A\leqslant-1.
 	\end{cases}$$
 
-	Для любого $i\geqslant2$ имеет место $10^i\equiv0\pmod4$, но $10\equiv2\pmod4$.
-	$$\sum_{i=0}^na_i10^i\equiv2a_1+a_0\pmod4$$
-
 \subsection{Признак делимости на $5$}
 
-	Опишем функцию, задающую признак делимости на $5$.
-	$$f(A)=\begin{cases}
+	Для начала заметим, что $10\equiv0\pmod5$.
+	
+	Пусть $|A|=10a+a_0$, тогда
+	$$A=\sgn(A)(10a+a_0)\equiv\sgn(A)a_0\pmod5.$$
+	
+	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $5$:
+	$$f_d(A)=\begin{cases}
+		a_0,&A\geqslant10,\\
+		A-5,&5\leqslant A<10.
+	\end{cases}$$
+	
+	Опишем функцию, задающую признак равноостаточности числа $A\in\mathbb{Z}$ на $5$:
+	$$f_r(A)=\begin{cases}
 		\sgn(A)a_0,&|A|\geqslant10,\\
 		A-5,&5\leqslant A<10,\\
 		A+5,&-10<A\leqslant-1.
 	\end{cases}$$
 
-	Для любого $i\in\mathbb{N}$ имеет место $10^i\equiv0\pmod5$.
-	$$\sum_{i=0}^na_i10^i\equiv a_0\pmod5$$
+\subsection{Признак делимости на $7$}
+
+	Пусть $\mathbb{N}\ni A=10a+a_0$. Для начала заметим, что
+	$$A=10a+a_0\equiv3a-6a_0=3(a-2a_0)\pmod7.$$
+	Так как $(3,7)=1$, получаем:
+	$$\boxed{3(a-2a_0)\equiv0\pmod7\Leftrightarrow a-2a_0\equiv0\pmod7}.$$
+
+	Опишем функцию, задающую признак делимости числа $A\in\mathbb{N}$ на $7$:
+	$$f_d(A)=\begin{cases}
+		|a-2a_0|,&A\geqslant10,\\
+		A-7,&7\leqslant A<10.
+	\end{cases}$$
+
+\newpage
+\section{Список литературы}
 
 \end{document}
